@@ -259,7 +259,7 @@ XML: N/A, the requested URI is an XML namespace.
       </section>
 
       <section title="The &quot;YANG Module Names&quot; Registry">
-        <t>This document registers two YANG modules in the "YANG Module Names" registry <xref target="RFC6020"/>. Following the format in <xref target="RFC6020"/>, the following registrations are
+        <t>This document registers one YANG modules in the "YANG Module Names" registry <xref target="RFC6020"/>. Following the format in <xref target="RFC6020"/>, the following registrations are
         requested:</t>
 
         <t><figure>

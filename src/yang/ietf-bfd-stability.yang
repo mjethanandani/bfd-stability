@@ -79,16 +79,18 @@ module ietf-bfd-stability {
      a per session count for BFD packets that are lost.
 
      Copyright (c) 2021 IETF Trust and the persons identified as
-     the document authors.  All rights reserved.
-     Redistribution and use in source and binary forms, with or
-     without modification, is permitted pursuant to, and subject
-     to the license terms contained in, the Simplified BSD
-     License set forth in Section 4.c of the IETF Trust's Legal
-     Provisions Relating to IETF Documents
-     (http://trustee.ietf.org/license-info).
+     authors of the code.  All rights reserved.
 
-     This version of this YANG module is part of RFC XXXX; see
-     the RFC itself for full legal notices.
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject to
+     the license terms contained in, the Simplified BSD License set
+     forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX
+     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+     for full legal notices.
 
      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
      NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
@@ -136,7 +138,7 @@ module ietf-bfd-stability {
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bfd:bfd/bfd-lag:lag/" +
           "bfd-lag:sessions/bfd-lag:session/bfd-lag:member-links/" +
-          "bfd-lag:micro-bfd-ipv4" {
+          "bfd-lag:micro-bfd-ipv4/bfd-lag:session-statistics" {
     leaf lost-packet-count {
       type yang:counter32;
       description
@@ -151,7 +153,7 @@ module ietf-bfd-stability {
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bfd:bfd/bfd-lag:lag/" +
           "bfd-lag:sessions/bfd-lag:session/bfd-lag:member-links/" +
-          "bfd-lag:micro-bfd-ipv6" {
+          "bfd-lag:micro-bfd-ipv6/bfd-lag:session-statistics" {
     leaf lost-packet-count {
       type yang:counter32;
       description
@@ -178,7 +180,7 @@ module ietf-bfd-stability {
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bfd:bfd/bfd-mpls:mpls/" +
           "bfd-mpls:session-groups/bfd-mpls:session-group/" +
-          "bfd-mpls:sessions" {
+          "bfd-mpls:sessions/bfd-mpls:session-statistics" {
     leaf lost-packet-count {
       type yang:counter32;
       description
