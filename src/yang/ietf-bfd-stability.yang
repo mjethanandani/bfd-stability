@@ -44,12 +44,6 @@ module ietf-bfd-stability {
        Forwarding Detection.";
   }
 
-  import ietf-te {
-    prefix te;
-    reference
-      "I-D.ietf-teas-yang: TE YANG Data Model.";
-  }
-  
   import ietf-bfd-mpls {
     prefix bfd-mpls;
     reference
@@ -64,13 +58,12 @@ module ietf-bfd-stability {
     "WG Web:   <http://tools.ietf.org/wg/bfd>
      WG List:  <bfd@ietf.org>
 
-     Authors: Mahesh Jethanandani (mjethanandani at gmail dot com)
-              Ashesh Mishra (mishra dot ashesh at gmail dot com)
-              Ankur Saxena (ankurpsaxena at gmail dot com)
-              Santosh Pallagatti (santosh dot pallagati at gmail dot
-              com)
-              Mach Chen (mach dot chen at huawei dot com)
-              Peng Fan (fanp08 at gmail dot com).";
+     Authors: Mahesh Jethanandani (mjethanandani@gmail.com)
+              Ashesh Mishra (mishra.ashesh@gmail.com)
+              Ankur Saxena (ankurpsaxena@gmail.com)
+              Santosh Pallagatti (santosh.pallagati@gmail.com)
+              Mach Chen (mach.chen@huawei.com)
+              Peng Fan (fanp08@gmail.com).";
               
 
   description
@@ -154,18 +147,6 @@ module ietf-bfd-stability {
           "rt:control-plane-protocol/bfd:bfd/bfd-lag:lag/" +
           "bfd-lag:sessions/bfd-lag:session/bfd-lag:member-links/" +
           "bfd-lag:micro-bfd-ipv6/bfd-lag:session-statistics" {
-    leaf lost-packet-count {
-      type yang:counter32;
-      description
-        "Number of BFD packets that were lost without bringing the
-         session down.";
-    }
-    description
-      "Augment the 'bfd' container to add attributes related to BFD
-       stability.";
-  }
-
-  augment "/te:te/te:lsps/te:lsp" {
     leaf lost-packet-count {
       type yang:counter32;
       description

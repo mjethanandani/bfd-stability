@@ -10,7 +10,8 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-ietf-bfd-stability-latest" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-bfd-stability-latest"
+     ipr="trust200902">
   <front>
     <title abbrev="BFD Stability">BFD Stability</title>
 
@@ -158,71 +159,112 @@
       </address>
     </author>
 
-    <date day="8" month="March" year="2021"/>
+    <date day="10" month="April" year="2021"/>
 
     <abstract>
-      <t>This document describes extensions to the Bidirectional Forwarding Detection (BFD) protocol to measure BFD stability. Specifically, it describes a mechanism for detection of BFD packet
-      loss.</t>
+      <t>This document describes extensions to the Bidirectional Forwarding
+      Detection (BFD) protocol to measure BFD stability. Specifically, it
+      describes a mechanism for detection of BFD packet loss.</t>
     </abstract>
   </front>
 
   <middle>
     <section title="Introduction">
-      <t>The Bidirectional Forwarding Detection ( <xref target="RFC5880">BFD)</xref> protocol operates by transmitting and receiving BFD control packets, generally at high frequency, over the datapath
-      being monitored. In order to prevent significant data loss due to a datapath failure, BFD session detection time as defined in <xref target="RFC5880">BFD</xref> is set to the smallest feasible
-      value.</t>
+      <t>The Bidirectional Forwarding Detection ( <xref
+      target="RFC5880">BFD)</xref> protocol operates by transmitting and
+      receiving BFD control packets, generally at high frequency, over the
+      datapath being monitored. In order to prevent significant data loss due
+      to a datapath failure, BFD session detection time as defined in <xref
+      target="RFC5880">BFD</xref> is set to the smallest feasible value.</t>
 
-      <t>This document proposes a mechanism to detect lost packets in a BFD session in addition to the datapath fault detection mechanisms of BFD. Such a mechanism presents significant value to
-      measure the stability of BFD sessions and provides data to the operators for the cause of a BFD failure.</t>
+      <t>This document proposes a mechanism to detect lost packets in a BFD
+      session in addition to the datapath fault detection mechanisms of BFD.
+      Such a mechanism presents significant value to measure the stability of
+      BFD sessions and provides data to the operators for the cause of a BFD
+      failure.</t>
 
-      <t>This document does not propose any BFD extension to measure data traffic loss or delay on a link or tunnel and the scope is limited to BFD packets.</t>
+      <t>This document does not propose any BFD extension to measure data
+      traffic loss or delay on a link or tunnel and the scope is limited to
+      BFD packets.</t>
     </section>
 
     <section title="Terminology">
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as
-      described in <xref target="RFC2119">RFC 2119</xref> and <xref target="RFC8174">RFC 8174</xref>.</t>
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+      "OPTIONAL" in this document are to be interpreted as described in <xref
+      target="RFC2119">RFC 2119</xref> and <xref target="RFC8174">RFC
+      8174</xref>.</t>
 
-      <t>The reader is expected to be familiar with the <xref target="RFC5880">BFD </xref>, <xref target="I-D.ietf-bfd-optimizing-authentication"> Optimizing BFD Authentication </xref> and <xref
-      target="I-D.ietf-bfd-secure-sequence-numbers"> BFD Secure Sequence Numbers </xref>.</t>
+      <t>The reader is expected to be familiar with the <xref
+      target="RFC5880">BFD </xref>, <xref
+      target="I-D.ietf-bfd-optimizing-authentication"> Optimizing BFD
+      Authentication </xref> and <xref
+      target="I-D.ietf-bfd-secure-sequence-numbers"> BFD Secure Sequence
+      Numbers </xref>.</t>
     </section>
 
     <section title="Use Cases">
-      <t>Bidirectional Forwarding Detection as defined in <xref target="RFC5880">BFD</xref> cannot detect any BFD packet loss if the loss does not last for detection time. This document proposes a
-      method to detect a dropped packet on the receiver. For example, if the receiver receives BFD control packet k at time t but receives packet k+3 at time t+10ms, and never receives packet k+1
-      and/or k+2, then it has experienced a drop.</t>
+      <t>Bidirectional Forwarding Detection as defined in <xref
+      target="RFC5880">BFD</xref> cannot detect any BFD packet loss if the
+      loss does not last for detection time. This document proposes a method
+      to detect a dropped packet on the receiver. For example, if the receiver
+      receives BFD control packet k at time t but receives packet k+3 at time
+      t+10ms, and never receives packet k+1 and/or k+2, then it has
+      experienced a drop.</t>
 
-      <t>This proposal enables BFD implementations to generate diagnostic information on the health of each BFD session that could be used to preempt a failure on a datapath that BFD was monitoring by
-      allowing time for a corrective action to be taken.</t>
+      <t>This proposal enables BFD implementations to generate diagnostic
+      information on the health of each BFD session that could be used to
+      preempt a failure on a datapath that BFD was monitoring by allowing time
+      for a corrective action to be taken.</t>
 
-      <t>In a faulty datapath scenario, an operator can use BFD health information to trigger delay and loss measurement OAM protocol (Connectivity Fault Management (CFM) or Loss Measurement
-      (LM)-Delay Measurement (DM)) to further isolate the issue.</t>
+      <t>In a faulty datapath scenario, an operator can use BFD health
+      information to trigger delay and loss measurement OAM protocol
+      (Connectivity Fault Management (CFM) or Loss Measurement (LM)-Delay
+      Measurement (DM)) to further isolate the issue.</t>
     </section>
 
     <section title="BFD Null-Authentication Type">
-      <t>The functionality proposed for BFD stability measurement is achieved by appending an authentication section with the NULL Authentication type (as defined in <xref
-      target="I-D.ietf-bfd-optimizing-authentication">Optimizing BFD Authentication</xref> ) to the BFD control packets that do not have authentication enabled.</t>
+      <t>The functionality proposed for BFD stability measurement is achieved
+      by appending an authentication section with the NULL Authentication type
+      (as defined in <xref
+      target="I-D.ietf-bfd-optimizing-authentication">Optimizing BFD
+      Authentication</xref> ) to the BFD control packets that do not have
+      authentication enabled.</t>
     </section>
 
     <section title="Theory of Operation">
-      <t>This mechanism allows operators to measure the loss of BFD control packets.</t>
+      <t>This mechanism allows operators to measure the loss of BFD control
+      packets.</t>
 
-      <t>When using MD5 or SHA authentication, BFD uses an authentication section that carries the Sequence Number. However, if non-meticulous authentication is being used, or no authentication is in
-      use, then the non-authenticated BFD control packets MUST include an authentication section with the NULL Authentication type.</t>
+      <t>When using MD5 or SHA authentication, BFD uses an authentication
+      section that carries the Sequence Number. However, if non-meticulous
+      authentication is being used, or no authentication is in use, then the
+      non-authenticated BFD control packets MUST include an authentication
+      section with the NULL Authentication type.</t>
 
       <section title="Loss Measurement">
-        <t>Loss measurement counts the number of BFD control packets missed at the receiver during any Detection Time period. The loss is detected by comparing the Sequence Number field in the Auth
-        TLV (NULL or otherwise) in successive BFD control packets. The Sequence Number in each successive control packet generated on a BFD session by the transmitter is incremented by one. This loss
-        count can then be exposed using the YANG module defined in the subsequent section.</t>
+        <t>Loss measurement counts the number of BFD control packets missed at
+        the receiver during any Detection Time period. The loss is detected by
+        comparing the Sequence Number field in the Auth TLV (NULL or
+        otherwise) in successive BFD control packets. The Sequence Number in
+        each successive control packet generated on a BFD session by the
+        transmitter is incremented by one. This loss count can then be exposed
+        using the YANG module defined in the subsequent section.</t>
 
-        <t>The first BFD authentication section with a non-zero sequence number, in a valid BFD control packet, processed by the receiver is used for bootstrapping the logic. When using secure
-        sequence numbers, if the expected values are pre-calculated, the value must be matched to detect lost packets as defined in <xref target="I-D.ietf-bfd-secure-sequence-numbers"> BFD secure
-        sequence numbers </xref>.</t>
+        <t>The first BFD authentication section with a non-zero sequence
+        number, in a valid BFD control packet, processed by the receiver is
+        used for bootstrapping the logic. When using secure sequence numbers,
+        if the expected values are pre-calculated, the value must be matched
+        to detect lost packets as defined in <xref
+        target="I-D.ietf-bfd-secure-sequence-numbers"> BFD secure sequence
+        numbers </xref>.</t>
       </section>
     </section>
 
     <section title="ietf-bfd-stability YANG Module">
       <section title="Data Model Overview">
-        <t>This YANG module augments the "ietf-bfd" module to add the loss count to the per-session or lsp for BFD packets that are lost.</t>
+        <t>This YANG module augments the "ietf-bfd" module to add the loss
+        count to the per-session or lsp for BFD packets that are lost.</t>
 
         <t><figure>
             <artwork><![CDATA[
@@ -232,8 +274,10 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bfd-stability@YYYY-MM-DD-tree.txt,69)
       </section>
 
       <section title="YANG Module">
-        <t>This YANG module imports <xref target="RFC6991">Common YANG Types</xref>, <xref target="RFC8349">A YANG Data Model for Routing</xref>, <xref target="I-D.ietf-teas-yang-te">TE YANG Data
-        Model</xref>, and <xref target="I-D.ietf-bfd-yang">YANG Data Model for Bidirectional Forwading Detection (BFD)</xref>.</t>
+        <t>This YANG module imports <xref target="RFC6991">Common YANG
+        Types</xref>, <xref target="RFC8349">A YANG Data Model for
+        Routing</xref>, and <xref target="I-D.ietf-bfd-yang">YANG Data Model
+        for Bidirectional Forwading Detection (BFD)</xref>.</t>
 
         <t><figure>
             <artwork><![CDATA[
@@ -247,8 +291,9 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bfd-stability@YYYY-MM-DD.yang,69)
 
     <section title="IANA Considerations">
       <section title="The &quot;IETF XML&quot; Registry">
-        <t>This document registers one URIs in the "ns" subregistry of the "IETF XML" registry <xref target="RFC3688"/>. Following the format in <xref target="RFC3688"/>, the following registration is
-        requested:</t>
+        <t>This document registers one URIs in the "ns" subregistry of the
+        "IETF XML" registry <xref target="RFC3688"/>. Following the format in
+        <xref target="RFC3688"/>, the following registration is requested:</t>
 
         <t><figure>
             <artwork><![CDATA[URI: urn:ietf:params:xml:ns:yang:ietf-bfd-stability
@@ -259,8 +304,9 @@ XML: N/A, the requested URI is an XML namespace.
       </section>
 
       <section title="The &quot;YANG Module Names&quot; Registry">
-        <t>This document registers one YANG modules in the "YANG Module Names" registry <xref target="RFC6020"/>. Following the format in <xref target="RFC6020"/>, the following registrations are
-        requested:</t>
+        <t>This document registers one YANG modules in the "YANG Module Names"
+        registry <xref target="RFC6020"/>. Following the format in <xref
+        target="RFC6020"/>, the following registrations are requested:</t>
 
         <t><figure>
             <artwork><![CDATA[
@@ -274,15 +320,26 @@ reference:    RFC XXXX
     </section>
 
     <section title="Security Consideration">
-      <t>The YANG module specified in this document defines a schema for data that is designed to be accessed via network management protocols such as <xref target="RFC6241">NETCONF</xref> or <xref
-      target="RFC8040">RESTCONF</xref>. The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is <xref target="RFC6242">Secure Shell (SSH)</xref>. The
-      lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is <xref target="RFC8446">TLS</xref>. The <xref target="RFC8341">NETCONF Access Control Model (NACM)</xref>
-      provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.</t>
+      <t>The YANG module specified in this document defines a schema for data
+      that is designed to be accessed via network management protocols such as
+      <xref target="RFC6241">NETCONF</xref> or <xref
+      target="RFC8040">RESTCONF</xref>. The lowest NETCONF layer is the secure
+      transport layer, and the mandatory-to-implement secure transport is
+      <xref target="RFC6242">Secure Shell (SSH)</xref>. The lowest RESTCONF
+      layer is HTTPS, and the mandatory-to-implement secure transport is <xref
+      target="RFC8446">TLS</xref>. The <xref target="RFC8341">NETCONF Access
+      Control Model (NACM)</xref> provides the means to restrict access for
+      particular NETCONF or RESTCONF users to a preconfigured subset of all
+      available NETCONF or RESTCONF protocol operations and content.</t>
 
-      <t>The YANG module does not define any writeable/creatable/deletable data nodes.</t>
+      <t>The YANG module does not define any writeable/creatable/deletable
+      data nodes.</t>
 
-      <t>The only readable data nodes in YANG module may be considered sensitive or vulnerable in some network environments. It is thus important to control read access (e.g., via get, get-config, or
-      notification) to these data nodes. The model does not define any readable subtrees and data nodes.</t>
+      <t>The only readable data nodes in YANG module may be considered
+      sensitive or vulnerable in some network environments. It is thus
+      important to control read access (e.g., via get, get-config, or
+      notification) to these data nodes. The model does not define any
+      readable subtrees and data nodes.</t>
 
       <t>The YANG module does not define any RPC operations.</t>
     </section>
@@ -292,7 +349,9 @@ reference:    RFC XXXX
     </section>
 
     <section title="Acknowledgements">
-      <t>Authors would like to thank Nobo Akiya, Jeffery Haas, Dileep Singh, Basil Saji, Sagar Soni, Albert Fu and Mallik Mudigonda who also contributed to this document.</t>
+      <t>Authors would like to thank Nobo Akiya, Jeffery Haas, Dileep Singh,
+      Basil Saji, Sagar Soni, Albert Fu and Mallik Mudigonda who also
+      contributed to this document.</t>
     </section>
   </middle>
 
@@ -328,7 +387,6 @@ reference:    RFC XXXX
 
       <?rfc include='reference.I-D.ietf-bfd-yang'?>
 
-      <?rfc include='reference.I-D.ietf-teas-yang-te'?>
     </references>
   </back>
 </rfc>
