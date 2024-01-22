@@ -1,0 +1,12 @@
+# Local tmp files
+.DS_Store
+
+# Emacs tmp files
+*~
+
+# Build directory
+bin
+
+# Build files
+draft/draft-ietf-bfd-stability-*
+draft/Diff*
