@@ -1,22 +1,22 @@
 import os
 
 list_of_ietf_models =\
-[ ["ietf-crypto-types", "draft-ietf-netconf-crypto-types", "18"],
-  ["ietf-truststore", "draft-ietf-netconf-trust-anchors", "13"],
-  ["ietf-keystore", "draft-ietf-netconf-keystore", "20"],
-  ["ietf-tcp-common", "draft-ietf-netconf-tcp-client-server", "08"],
-  ["ietf-tcp-client", "draft-ietf-netconf-tcp-client-server", "08"],
-  ["ietf-tls-client", "draft-ietf-netconf-tls-client-server", "22"],
-  ["ietf-tls-common", "draft-ietf-netconf-tls-client-server", "22"],
-  ["ietf-tls-server", "draft-ietf-netconf-tls-client-server", "22"],
-  ["ietf-http-client", "draft-ietf-netconf-http-client-server", "05"] ]
+[ ["ietf-crypto-types", "draft-ietf-netconf-crypto-types", "25"],
+  ["ietf-truststore", "draft-ietf-netconf-trust-anchors", "19"],
+  ["ietf-keystore", "draft-ietf-netconf-keystore", "26"],
+  ["ietf-tcp-common", "draft-ietf-netconf-tcp-client-server", "14"],
+  ["ietf-tcp-client", "draft-ietf-netconf-tcp-client-server", "14"],
+  ["ietf-tls-client", "draft-ietf-netconf-tls-client-server", "31"],
+  ["ietf-tls-common", "draft-ietf-netconf-tls-client-server", "31"],
+  ["ietf-tls-server", "draft-ietf-netconf-tls-client-server", "31"],
+  ["ietf-http-client", "draft-ietf-netconf-http-client-server", "11"] ]
 
 
 def fetch_and_extract(draft, module, version):
     print("Fetching file " + draft + " with version " + version)
     draft_version = draft + "-" + version
     print(draft_version)
-    os.system('curl -sO https://tools.ietf.org/id/%s.txt' %draft_version)
+    os.system('curl -sO https://www.ietf.org/archive/id/%s.txt' %draft_version)
     print("Extracting Module from " + draft_version)
     os.system('xym %s.txt' %draft_version)
     print("Moving module " + module + " to ../bin/imported-modules/")
