@@ -1,5 +1,13 @@
 #!/bin/sh
 
+#
+# First check to see if you need to create/update your yang repository of
+# all IETF published YANG models.
+#
+if [ ! -d ../bin/yang-parameters ]; then
+   rsync -avz --delete rsync.iana.org::assignments/yang-parameters ../bin/
+fi
+
 for i in ../bin/*\@$(date +%Y-%m-%d).yang
 do
     name=$(echo $i | cut -f 1-3 -d '.')
@@ -33,9 +41,9 @@ do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Generating abridged tree diagram for $name.yang"
     if test "${name#^example}" = "$name"; then
-       response=`pyang --lint --strict --canonical -p ../bin/submodules -p ../bin -f tree --tree-depth=7 --max-line-length=69 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
+       response=`pyang --lint --strict --canonical -p ../bin -f tree --tree-depth=7 --max-line-length=69 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
     else            
-       response=`pyang --ietf --strict --canonical -p ../bin/submodules -p ../bin -f tree --tree-depth=3 --max-line-length=69 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
+       response=`pyang --ietf --strict --canonical -p ../bin -f tree --tree-depth=3 --max-line-length=69 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
     fi
     if [ $? -ne 0 ]; then
         printf "$name.yang failed generation of sub-tree diagram\n"
