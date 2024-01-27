@@ -179,69 +179,93 @@
       Measurement (DM)) to further isolate the issue.</t>
     </section>
 
-    <section title="BFD Null-Authentication Type">
-      <t>The functionality proposed for BFD stability measurement is achieved
-      by appending an authentication section with the NULL Authentication type
-      (as defined in <xref
-      target="I-D.ietf-bfd-optimizing-authentication">Optimizing BFD
-      Authentication</xref> ) to the BFD control packets that do not have
-      authentication enabled.</t>
+    <section title="Functionality">
+      <t>
+	The functionality proposed for BFD stability measurement is
+	achieved by configuring the 'stability' flag in the attached
+	YANG model. Since the Sequence Number is carried in the
+	authentication section of the PDU, it implies that the session
+	MUST use some form of authentication, i.e., the A-bit must be
+	set, and the authentication type (bfd.AuthType) MUST be of
+	type meticulous.
+      </t>
     </section>
 
     <section title="Theory of Operation">
-      <t>This mechanism allows operators to measure the loss of BFD control
-      packets.</t>
+      <t>
+	This mechanism allows operators to measure the loss of BFD
+	control packets.
+      </t>
 
-      <t>When using MD5 or SHA authentication, BFD uses an authentication
-      section that carries the Sequence Number. However, if non-meticulous
-      authentication is being used, or no authentication is in use, then the
-      non-authenticated BFD control packets MUST include an authentication
-      section with the NULL Authentication type.</t>
+      <t>
+	When using MD5 or SHA authentication, BFD MUST use an
+	authentication type (bfd.AuthType) that is of type meticulous.
+	Similarly, if BFD uses the NULL bfd.AuthType as defined in
+	<xref
+	target="I-D.ietf-bfd-optimizing-authentication">Optimizing BFD
+	Authentication</xref>, the authentication method it chooses
+	MUST be of type meticulous.
+      </t>
 
       <section title="Loss Measurement">
-        <t>Loss measurement counts the number of BFD control packets missed at
-        the receiver during any Detection Time period. The loss is detected by
-        comparing the Sequence Number field in the Auth TLV (NULL or
-        otherwise) in successive BFD control packets. The Sequence Number in
-        each successive control packet generated on a BFD session by the
-        transmitter is incremented by one. This loss count can then be exposed
-        using the YANG module defined in the subsequent section.</t>
+        <t>
+	  Loss measurement counts the number of BFD control packets
+	  missed at the receiver during any Detection Time period. The
+	  loss is detected by comparing the Sequence Number field in
+	  successive BFD control packets. The Sequence Number in each
+	  successive control packet generated on a BFD session by the
+	  transmitter is incremented by one. This loss count can then
+	  be exposed using the YANG module defined in the subsequent
+	  section.
+	</t>
 
-        <t>The first BFD authentication section with a non-zero sequence
-        number, in a valid BFD control packet, processed by the receiver is
-        used for bootstrapping the logic. When using secure sequence numbers,
-        if the expected values are pre-calculated, the value must be matched
-        to detect lost packets as defined in <xref
-        target="I-D.ietf-bfd-secure-sequence-numbers"> BFD secure sequence
-        numbers </xref>.</t>
+        <t>
+	  The first BFD authentication section with a non-zero
+	  sequence number, in a valid BFD control packet, processed by
+	  the receiver is used for bootstrapping the logic.
+	</t>
       </section>
     </section>
 
-    <section title="ietf-bfd-stability YANG Module">
-      <section title="Data Model Overview">
-        <t>This YANG module augments the "ietf-bfd" module to add the loss
-        count to the per-session or lsp for BFD packets that are lost.</t>
+    <section anchor="yang-module" title="Stability YANG Module">
+      <section anchor="data-model-overview" title="Data Model Overview">
+        <t>
+	  This YANG module augments the "ietf-bfd" module to add a
+	  flag 'stability' to enable this feature. The feature
+	  statement 'stability' needs to be enabled to indicate that
+	  BFD Stability is supported by the implementation. In
+	  addition, a loss count per-session or lsp for BFD packets
+	  that are lost has also been added in this model.
+	</t>
 
-        <t><figure>
+        <t>
+	  <figure>
             <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../bin/ietf-bfd-stability@YYYY-MM-DD-tree.txt,69)
-]]></artwork>
-          </figure></t>
+]]>
+	    </artwork>
+          </figure>
+	</t>
       </section>
 
       <section title="YANG Module">
-        <t>This YANG module imports <xref target="RFC6991">Common YANG
-        Types</xref>, <xref target="RFC8349">A YANG Data Model for
-        Routing</xref>, and <xref target="RFC9314">YANG Data Model
-        for Bidirectional Forwading Detection (BFD)</xref>.</t>
+        <t>
+	  This YANG module imports <xref target="RFC6991">Common YANG
+	  Types</xref>, <xref target="RFC8349">A YANG Data Model for
+	  Routing</xref>, and <xref target="RFC9314">YANG Data Model
+	  for Bidirectional Forwading Detection (BFD)</xref>.
+	</t>
 
-        <t><figure>
+        <t>
+	  <figure>
             <artwork><![CDATA[
-<CODE BEGINS> file "ietf-bfd-stability@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/ietf-bfd-stability@YYYY-MM-DD.yang,69)
-<CODE ENDS>
-]]></artwork>
-          </figure></t>
+	    <CODE BEGINS> file "ietf-bfd-stability@YYYY-MM-DD.yang"
+	    INSERT_TEXT_FROM_FILE(../bin/ietf-bfd-stability@YYYY-MM-DD.yang,69)
+	    <CODE ENDS>
+	    ]]>
+	    </artwork>
+          </figure>
+	</t>
       </section>
     </section>
 
@@ -251,12 +275,15 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bfd-stability@YYYY-MM-DD.yang,69)
         "IETF XML" registry <xref target="RFC3688"/>. Following the format in
         <xref target="RFC3688"/>, the following registration is requested:</t>
 
-        <t><figure>
+        <t>
+	  <figure>
             <artwork><![CDATA[URI: urn:ietf:params:xml:ns:yang:ietf-bfd-stability
 Registrant Contact: The IESG
 XML: N/A, the requested URI is an XML namespace.
-]]></artwork>
-          </figure></t>
+]]>
+	    </artwork>
+          </figure>
+	</t>
       </section>
 
       <section title="The &quot;YANG Module Names&quot; Registry">
@@ -288,14 +315,18 @@ reference:    RFC XXXX
       particular NETCONF or RESTCONF users to a preconfigured subset of all
       available NETCONF or RESTCONF protocol operations and content.</t>
 
-      <t>The YANG module does not define any writeable/creatable/deletable
-      data nodes.</t>
+      <t>
+	The YANG module does not define any
+	writeable/creatable/deletable data nodes that can have an
+	adverse impact on a BFD session.
+      </t>
 
-      <t>The only readable data nodes in YANG module may be considered
-      sensitive or vulnerable in some network environments. It is thus
-      important to control read access (e.g., via get, get-config, or
-      notification) to these data nodes. The model does not define any
-      readable subtrees and data nodes.</t>
+      <t>
+	The only readable data nodes in YANG module may be considered
+	sensitive or vulnerable in some network environments. It is
+	thus important to control read access (e.g., via get,
+	get-config, or notification) to these data nodes.
+      </t>
 
       <t>The YANG module does not define any RPC operations.</t>
     </section>
