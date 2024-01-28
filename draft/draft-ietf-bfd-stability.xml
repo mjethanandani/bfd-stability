@@ -237,7 +237,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bfd-stability@YYYY-MM-DD-tree.txt,69)
 
         <t><figure>
             <artwork><![CDATA[
-<CODE BEGINS>
+<CODE BEGINS> file "ietf-bfd-stability@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/ietf-bfd-stability@YYYY-MM-DD.yang,69)
 <CODE ENDS>
 ]]></artwork>
