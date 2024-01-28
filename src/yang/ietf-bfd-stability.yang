@@ -115,7 +115,7 @@ module ietf-bfd-stability {
       default false;
       description
         "If set to true, this enables the BFD session to monitor
-         for stability, i.e., to watch how many frames are getting
+         for stability; i.e., to watch how many frames are getting
          dropped.";
     }
     description
@@ -129,10 +129,12 @@ module ietf-bfd-stability {
     leaf stability {
       if-feature "stability";
       type boolean;
+      must "../bfd-ip-mh:authentication/bfd-ip-mh:meticulous = " +
+           "'true'";
       default false;
       description
         "If set to true, this enables the BFD session to monitor
-         for stability, i.e., to watch how many frames are getting
+         for stability; i.e., to watch how many frames are getting
          dropped.";
     }
     description
@@ -146,10 +148,12 @@ module ietf-bfd-stability {
     leaf stability {
       if-feature "stability";
       type boolean;
+      must "../bfd-lag:authentication/bfd-lag:meticulous = " +
+           "'true'";
       default false;
       description
         "If set to true, this enables the BFD session to monitor
-         for stability, i.e., to watch how many frames are getting
+         for stability; i.e., to watch how many frames are getting
          dropped.";
     }
     description
@@ -163,10 +167,12 @@ module ietf-bfd-stability {
     leaf stability {
       if-feature "stability";
       type boolean;
+      must "../bfd-mpls:authentication/bfd-mpls:meticulous = " +
+           "'true'";
       default false;
       description
         "If set to true, this enables the BFD session to monitor
-         for stability, i.e., to watch how many frames are getting
+         for stability; i.e., to watch how many frames are getting
          dropped.";
     }
     description
@@ -198,7 +204,8 @@ module ietf-bfd-stability {
       type yang:counter32;
       description
         "Number of BFD packets that were lost without bringing the
-         session down.";
+         session down. This counter should be present only if
+         stability is configured.";
     }
     description
       "Augment the 'bfd' container to add attributes related to BFD
@@ -213,7 +220,8 @@ module ietf-bfd-stability {
       type yang:counter32;
       description
         "Number of BFD packets that were lost without bringing the
-         session down.";
+         session down. This counter should be present only if
+         stability is configured.";
     }
     description
       "Augment the 'bfd' container to add attributes related to BFD
@@ -228,7 +236,8 @@ module ietf-bfd-stability {
       type yang:counter32;
       description
         "Number of BFD packets that were lost without bringing the
-         session down.";
+         session down. This counter should be present only if
+         stability is configured.";
     }
     description
       "Augment the 'bfd' container to add attributes related to BFD

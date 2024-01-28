@@ -126,7 +126,7 @@
 
   <middle>
     <section title="Introduction">
-      <t>The Bidirectional Forwarding Detection ( <xref
+      <t>The Bidirectional Forwarding Detection (<xref
       target="RFC5880">BFD)</xref> protocol operates by transmitting and
       receiving BFD control packets, generally at high frequency, over the
       datapath being monitored. In order to prevent significant data loss due
@@ -183,11 +183,7 @@
       <t>
 	The functionality proposed for BFD stability measurement is
 	achieved by configuring the 'stability' flag in the attached
-	YANG model. Since the Sequence Number is carried in the
-	authentication section of the PDU, it implies that the session
-	MUST use some form of authentication, i.e., the A-bit must be
-	set, and the authentication type (bfd.AuthType) MUST be of
-	type meticulous.
+	YANG model in conjunction with BFD Meticulous Authentication.
       </t>
     </section>
 
