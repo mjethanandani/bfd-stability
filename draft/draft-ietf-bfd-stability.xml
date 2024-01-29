@@ -324,11 +324,24 @@ reference:    RFC XXXX
 	get-config, or notification) to these data nodes.
       </t>
 
+      <t>
+	The model defines a read-only variables to indicate the number
+	of packets that were lost. Access to this information may
+	allow a malicious user information on which links are
+	experiencing issues.
+      </t>
+
       <t>The YANG module does not define any RPC operations.</t>
     </section>
 
     <section title="Contributors">
-      <t>Manav Bhatia</t>
+      <t>
+	The authors of this document would like to acknowledge Jeff
+	Haas as a contributor to this document. Jeff played a role not
+	only as a shepherd but also actively contributed to the
+	improvement of the document. In addition, Manav Bhatia also
+	contributed to this document.
+      </t>
     </section>
 
     <section title="Acknowledgements">
