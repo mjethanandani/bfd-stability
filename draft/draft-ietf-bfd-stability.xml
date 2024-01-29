@@ -18,7 +18,7 @@
   <front>
     <title abbrev="BFD Stability">BFD Stability</title>
     <author fullname="Ashesh Mishra" initials="A" surname="Mishra">
-      <organization>SES</organization>
+      <organization>Aalyria Technologies</organization>
       <address>
         <postal>
           <street/>
@@ -28,7 +28,7 @@
           <country/>
         </postal>
         <phone/>
-        <email>mishra.ashesh@gmail.com</email>
+        <email>ashesh@aalyria.com</email>
         <uri/>
       </address>
     </author>
@@ -196,7 +196,7 @@
       <t>
 	When using MD5 or SHA authentication, BFD MUST use an
 	authentication type (bfd.AuthType) that is of type meticulous.
-	Similarly, if BFD uses the NULL bfd.AuthType as defined in
+	Similarly, if BFD uses the OPT bfd.AuthType as defined in
 	<xref
 	target="I-D.ietf-bfd-optimizing-authentication">Optimizing BFD
 	Authentication</xref>, the authentication method it chooses
