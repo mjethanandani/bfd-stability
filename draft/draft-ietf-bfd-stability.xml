@@ -371,5 +371,26 @@ reference:    RFC XXXX
 
 
     </references>
+    <section anchor="examples" title="Examples">
+      <t>
+	This section tries to show some examples in how the model can
+	be configured for stability.
+      </t>
+      <section anchor="example-a.1.1" title="Single Hop BFD Configuration">
+	<t>
+          This example demonstrates how a Single Hop BFD session can
+          be configured to enable monitoring of a session for
+          stability.
+	</t>
+	<t>
+          <figure>
+            <artwork><![CDATA[
+            INSERT_TEXT_FROM_FILE(../src/yang/example-bfd-stability-a.1.1.xml,68)
+            ]]>
+            </artwork>
+          </figure>
+	</t>
+      </section>
+    </section>
   </back>
 </rfc>

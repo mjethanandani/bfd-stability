@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interfaces
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"
+    xmlns:if-type="urn:ietf:params:xml:ns:yang:iana-if-type">
+  <interface>
+    <name>eth0</name>
+    <type>if-type:ethernetCsmacd</type>
+  </interface>
+</interfaces>
+<routing
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-routing"
+    xmlns:bfd-types="urn:ietf:params:xml:ns:yang:ietf-bfd-types"
+    xmlns:stability="urn:ietf:params:xml:ns:yang:ietf-bfd-stability">
+  <control-plane-protocols>
+    <control-plane-protocol>
+      <type>bfd-types:bfdv1</type>
+      <name>name:BFD</name>
+      <bfd xmlns="urn:ietf:params:xml:ns:yang:ietf-bfd">
+        <ip-sh xmlns="urn:ietf:params:xml:ns:yang:ietf-bfd-ip-sh">
+          <sessions>
+            <session>
+              <interface>eth0</interface>
+              <dest-addr>2001:db8:0:113::101</dest-addr>
+              <desired-min-tx-interval>10000</desired-min-tx-interval>
+              <required-min-rx-interval>
+                10000
+              </required-min-rx-interval>
+              <stability:stability>true</stability:stability>
+              <authentication>
+                <meticulous>true</meticulous>
+              </authentication>
+            </session>
+          </sessions>
+        </ip-sh>
+      </bfd>
+    </control-plane-protocol>
+  </control-plane-protocols>
+</routing>
