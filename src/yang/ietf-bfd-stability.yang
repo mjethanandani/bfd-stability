@@ -51,6 +51,12 @@ module ietf-bfd-stability {
        Forwarding Detection.";
   }
 
+  import ietf-key-chain {
+    prefix key-chain;
+    reference
+      "RFC 8177: YANG Key Chain.";
+  }
+
   organization
     "IETF BFD Working Group";
 
@@ -102,6 +108,23 @@ module ietf-bfd-stability {
     description
       "If supported, the feature allows for BFD sessions to be
        monitored for frames lost.";
+  }
+
+  // The two other auth types not defined in the ietf-keychain
+  // model, but those that can be used by this YANG model.
+  identity meticulous-keyed-md5 {
+    base key-chain:crypto-algorithm;
+    description
+      "Meticulous Keyed MD5.";
+    reference
+      "RFC 5880: BFD.";
+  }
+  identity meticulous-keyed-sha1 {
+    base key-chain:crypto-algorithm;
+    description
+      "Meticulous Keyed SHA1.";
+    reference
+      "RFC 5880: BFD.";
   }
 
   augment "/rt:routing/rt:control-plane-protocols/" +

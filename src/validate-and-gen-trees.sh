@@ -61,7 +61,7 @@ for i in yang/example-bfd-stability-a.1.*.xml
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.xml"
-    response=`yanglint -ii -t config -p ../bin/yang-parameters -p ../bin ../bin/yang-parameters/iana-if-type@2021-05-17.yang ../bin/yang-parameters/ietf-bfd-ip-sh@2022-09-22.yang ../bin/yang-parameters/ietf-bfd@2022-09-22.yang ../bin/ietf-bfd-stability\@$(date +%Y-%m-%d).yang $name.xml`
+    response=`yanglint -ii -t config -p ../bin/yang-parameters -p ../bin ../bin/yang-parameters/ietf-key-chain@2017-06-15.yang ../bin/yang-parameters/iana-if-type@2021-05-17.yang ../bin/yang-parameters/ietf-bfd-ip-sh@2022-09-22.yang ../bin/yang-parameters/ietf-bfd@2022-09-22.yang ../bin/ietf-bfd-stability\@$(date +%Y-%m-%d).yang $name.xml`
     if [ $? -ne 0 ]; then
        printf "failed (error code: $?)\n"
        printf "$response\n\n"

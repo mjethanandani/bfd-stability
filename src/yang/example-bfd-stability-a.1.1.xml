@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<key-chains
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-key-chain"
+    xmlns:stability="urn:ietf:params:xml:ns:yang:ietf-bfd-stability">
+  <key-chain>
+    <name>bfd-stability-config</name>
+    <description>"An example for BFD Stabalized configuration."</description>
+    <key>
+      <key-id>55</key-id>
+      <lifetime>
+        <send-lifetime>
+          <start-date-time>2017-01-01T00:00:00Z</start-date-time>
+          <end-date-time>2017-02-01T00:00:00Z</end-date-time>
+        </send-lifetime>
+        <accept-lifetime>
+          <start-date-time>2016-12-31T23:59:55Z</start-date-time>
+          <end-date-time>2017-02-01T00:00:05Z</end-date-time>
+        </accept-lifetime>
+      </lifetime>
+      <crypto-algorithm>stability:meticulous-keyed-sha1</crypto-algorithm>
+    </key>
+  </key-chain>
+</key-chains>
 <interfaces
     xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"
     xmlns:if-type="urn:ietf:params:xml:ns:yang:iana-if-type">
@@ -27,6 +49,7 @@
               </required-min-rx-interval>
               <stability:stability>true</stability:stability>
               <authentication>
+                <key-chain>bfd-stability-config</key-chain>
                 <meticulous>true</meticulous>
               </authentication>
             </session>
