@@ -56,7 +56,7 @@ module ietf-bfd-stability {
 
   contact
     "WG Web:   <http://tools.ietf.org/wg/bfd>
-     WG List:  <bfd@ietf.org>
+     WG List:  <rtg-bfd@ietf.org>
 
      Authors: Mahesh Jethanandani (mjethanandani@gmail.com)
               Ashesh Mishra (mishra.ashesh@gmail.com)
