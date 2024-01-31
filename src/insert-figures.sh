@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#FOLD=rfcfold
-FOLD="$(dirname $0)/rfcfold"
+FOLD=rfcfold
 
 # make sure input params are good
 if [ "$#" == "0" ]; then

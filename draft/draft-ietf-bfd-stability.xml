@@ -18,7 +18,7 @@
   <front>
     <title abbrev="BFD Stability">BFD Stability</title>
     <author fullname="Ashesh Mishra" initials="A" surname="Mishra">
-      <organization>SES</organization>
+      <organization>Aalyria Technologies</organization>
       <address>
         <postal>
           <street/>
@@ -28,7 +28,7 @@
           <country/>
         </postal>
         <phone/>
-        <email>mishra.ashesh@gmail.com</email>
+        <email>ashesh@aalyria.com</email>
         <uri/>
       </address>
     </author>
@@ -196,7 +196,7 @@
       <t>
 	When using MD5 or SHA authentication, BFD MUST use an
 	authentication type (bfd.AuthType) that is of type meticulous.
-	Similarly, if BFD uses the NULL bfd.AuthType as defined in
+	Similarly, if BFD uses the OPT bfd.AuthType as defined in
 	<xref
 	target="I-D.ietf-bfd-optimizing-authentication">Optimizing BFD
 	Authentication</xref>, the authentication method it chooses
@@ -384,5 +384,26 @@ reference:    RFC XXXX
 
 
     </references>
+    <section anchor="examples" title="Examples">
+      <t>
+	This section tries to show some examples in how the model can
+	be configured for stability.
+      </t>
+      <section anchor="example-a.1.1" title="Single Hop BFD Configuration">
+	<t>
+          This example demonstrates how a Single Hop BFD session can
+          be configured to enable monitoring of a session for
+          stability.
+	</t>
+	<t>
+          <figure>
+            <artwork><![CDATA[
+            INSERT_TEXT_FROM_FILE(../src/yang/example-bfd-stability-a.1.1.xml,68)
+            ]]>
+            </artwork>
+          </figure>
+	</t>
+      </section>
+    </section>
   </back>
 </rfc>
