@@ -155,8 +155,8 @@
       target="RFC5880">BFD </xref>, <xref
       target="I-D.ietf-bfd-optimizing-authentication">Optimizing BFD
       Authentication </xref> and <xref
-      target="I-D.ietf-bfd-secure-sequence-numbers">BFD Secure
-      Sequence Numbers </xref>.</t>
+      target="I-D.ietf-bfd-secure-sequence-numbers">Meticulous Keyed
+      ISAAC for BFD Authentication</xref>.</t>
     </section>
 
     <section title="Use Cases">
