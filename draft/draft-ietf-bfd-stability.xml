@@ -183,8 +183,66 @@
       <t>
 	The functionality proposed for BFD stability measurement is
 	achieved by configuring the 'stability' flag in the attached
-	YANG model in conjunction with BFD Meticulous Authentication.
+	YANG model in conjunction with any BFD Meticulous Authentication.
       </t>
+    </section>
+
+    <section anchor="null-auth-type" title="NULL Auth Type">
+      <t>The NULL Authentication Type, defined here, can be used to provide a
+      meticulously increasing sequence number for stability measurement.  It
+      provides none of the protections desired for authentication and is used
+      only to provide BFD stability services to BFD sessions that otherwise have
+      no authentication in use.</t>
+
+      <t>If the Authentication Present (A) bit is set in the header, and the
+      Authentication Type field contains TBD, the Authentication section has the
+      following format:
+      <figure
+          align="center" title="NULL Auth Type">
+        <artwork><![CDATA[
+       0                   1                   2                   3
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |   Auth Type   |   Auth Len    |  Auth Key ID  |   Reserved    |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |                        Sequence Number                        |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      ]]></artwork>
+      </figure>
+      where:
+      </t>
+
+      <t>
+	Auth Type: The Authentication Type, which in this case is TBD
+	(NULL, to be assigned by IANA, with a suggested value of 6).
+      </t>
+
+      <t>Auth Len: The length of the NULL Auth Type, in bytes; i.e. 8 bytes</t>
+
+      <t>Auth Key ID: The authentication key ID in use for this packet. Must
+      be set to zero and ignored on receipt.</t>
+
+      <t>Reserved: This byte MUST be set to zero on transmit and ignored on
+      receipt.</t>
+
+      <t>Sequence Number: The sequence number for this packet.  This value is
+      incremented for each successive packet transmitted for a session.
+      Implementations will use sequence numbers (bfd.XmitAuthSeq) as defined in
+      <xref target="RFC5880">BFD</xref>.</t>
+
+      <t>If bfd.AuthSeqKnown is 0, bfdAuthSeqKnown is set to 1, and
+      bfd.RcvAuthSeq is set to the value of the received Sequence Number
+      field.</t>
+
+      <t>If bfd.AuthSeqKnown is 1, and the received Sequence Number field is not
+      equal to bfd.RcvAuthSeq + 1 (in a circular number space), then the loss
+      count is incremented by one and bfd.RcvAuthSeq is set to the received
+      Sequence Number.</t>
+
+      <t>Unlike other authentication mechanisms defined for BFD that provide an
+      Auth Key/Digest field, when bfd.AuthSeqKnob is 1, the received Sequence
+      Number MUST NOT be compared vs. bfd.RcvAuthSeq for purposes of discarding
+      the BFD packets.</t>
     </section>
 
     <section title="Theory of Operation">
@@ -196,11 +254,11 @@
       <t>
 	When using MD5 or SHA authentication, BFD MUST use an
 	authentication type (bfd.AuthType) that is of type meticulous.
-	Similarly, if BFD uses the OPT bfd.AuthType as defined in
-	<xref
-	target="I-D.ietf-bfd-optimizing-authentication">Optimizing BFD
-	Authentication</xref>, the authentication method it chooses
-	MUST be of type meticulous.
+	Other authentication types that provide for meticulously increasing
+	sequence numbers can also be used.  This includes the NULL
+	authentication mechanism defined in this document or 
+	<xref target="I-D.ietf-bfd-secure-sequence-numbers">Meticulous Keyed
+	ISAAC for BFD Authentication</xref>.
       </t>
 
       <section title="Loss Measurement">
@@ -219,6 +277,22 @@
 	  The first BFD authentication section with a non-zero
 	  sequence number, in a valid BFD control packet, processed by
 	  the receiver is used for bootstrapping the logic.
+	</t>
+      </section>
+
+      <section title="Out of Order Packets">
+        <t>
+	  Some transmission mechanisms - for example, Link Aggregate Groups
+	  (LAG), or Equal Cost Multipath (ECMP) - can result in out of order
+	  packet delivery.  In circumstances where BFD packets are not lost, but
+	  are delivered out of order, strict comparison of increasing sequence
+	  numbers may result in classifying the out of order packets as packet
+	  loss.
+	</t>
+	<t>
+	  Implementations MAY provide mechanisms wherein all expected packets
+	  received across an expected interval but delivered out of order are
+	  not considered lost packets.
 	</t>
       </section>
     </section>
@@ -299,40 +373,65 @@ reference:    RFC XXXX
     </section>
 
     <section title="Security Consideration">
-      <t>The YANG module specified in this document defines a schema for data
-      that is designed to be accessed via network management protocols such as
-      <xref target="RFC6241">NETCONF</xref> or <xref
-      target="RFC8040">RESTCONF</xref>. The lowest NETCONF layer is the secure
-      transport layer, and the mandatory-to-implement secure transport is
-      <xref target="RFC6242">Secure Shell (SSH)</xref>. The lowest RESTCONF
-      layer is HTTPS, and the mandatory-to-implement secure transport is <xref
-      target="RFC8446">TLS</xref>. The <xref target="RFC8341">NETCONF Access
-      Control Model (NACM)</xref> provides the means to restrict access for
-      particular NETCONF or RESTCONF users to a preconfigured subset of all
-      available NETCONF or RESTCONF protocol operations and content.</t>
+      <section title="YANG Security Considerations">
+	<t>The YANG module specified in this document defines a schema for data
+	that is designed to be accessed via network management protocols such as
+	<xref target="RFC6241">NETCONF</xref> or <xref
+	target="RFC8040">RESTCONF</xref>. The lowest NETCONF layer is the secure
+	transport layer, and the mandatory-to-implement secure transport is
+	<xref target="RFC6242">Secure Shell (SSH)</xref>. The lowest RESTCONF
+	layer is HTTPS, and the mandatory-to-implement secure transport is <xref
+	target="RFC8446">TLS</xref>. The <xref target="RFC8341">NETCONF Access
+	Control Model (NACM)</xref> provides the means to restrict access for
+	particular NETCONF or RESTCONF users to a preconfigured subset of all
+	available NETCONF or RESTCONF protocol operations and content.</t>
 
-      <t>
-	The YANG module does not define any
-	writeable/creatable/deletable data nodes that can have an
-	adverse impact on a BFD session.
-      </t>
+	<t>
+	  The YANG module does not define any
+	  writeable/creatable/deletable data nodes that can have an
+	  adverse impact on a BFD session.
+	</t>
 
-      <t>
-	The only readable data nodes in YANG module may be considered
-	sensitive or vulnerable in some network environments. It is
-	thus important to control read access (e.g., via get,
-	get-config, or notification) to these data nodes.
-      </t>
+	<t>
+	  The only readable data nodes in YANG module may be considered
+	  sensitive or vulnerable in some network environments. It is
+	  thus important to control read access (e.g., via get,
+	  get-config, or notification) to these data nodes.
+	</t>
 
-      <t>
-	The model defines a read-only variables to indicate the number
-	of packets that were lost. Access to this information may
-	allow a malicious user information on which links are
-	experiencing issues.
-      </t>
+	<t>
+	  The model defines a read-only variables to indicate the number
+	  of packets that were lost. Access to this information may
+	  allow a malicious user information on which links are
+	  experiencing issues.
+	</t>
 
-      <t>The YANG module does not define any RPC operations.</t>
+	<t>The YANG module does not define any RPC operations.</t>
+      </section>
+
+      <section title="BFD NULL Auth Security Considerations">
+	<t>Use of a BFD authentication mechanism that protects the BFD packets
+	is RECOMMENDED.</t>
+
+        <t>The Security Considerations of <xref target="RFC5880"/> for
+	unauthenticated BFD all apply to the new NULL authentication type.
+	The NULL Authentication type, defined in this document, provides none
+	of the properties desired for authenticating BFD packets.  It is
+	intended to provide BFD sessions that otherwise would not use
+	authentication a sequence number that can be used for purposes of
+	detecting lost packets.</t>
+
+	<t>The lack of a computed AuthKey/Digest over the BFD packet but the
+	presence of a Sequence Number makes this authentication type susceptible
+	to injection attacks.  BFD without authentication is vulnerable to
+	session resets; the NULL Auth type does not change this.</t>
+
+	<t>When the NULL Authentication type is used for BFD Stability purposes,
+	maliciously injected packets that do not reset the BFD session can
+	resemble high packet loss.</t>
+      </section>
     </section>
+
 
     <section title="Contributors">
       <t>
