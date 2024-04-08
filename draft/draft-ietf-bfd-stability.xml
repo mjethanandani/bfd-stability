@@ -340,19 +340,33 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bfd-stability@YYYY-MM-DD-tree.txt,69)
     </section>
 
     <section title="IANA Considerations">
-      <section title="The &quot;IETF XML&quot; Registry">
-        <t>This document registers one URIs in the "ns" subregistry of the
-        "IETF XML" registry <xref target="RFC3688"/>. Following the format in
-        <xref target="RFC3688"/>, the following registration is requested:</t>
+      <t>This document requests one new authentication type and
+      registers one URIs in the "ns" subregistry of the "IETF XML"
+      registry <xref target="RFC3688"/>.</t>
 
-        <t>
+      <section anchor="auth-type" title="Auth Type">
+	<t>
+	  This document requests an update to the registry titled "BFD
+	  Authentication Types". IANA is requested to assign a new
+	  BFD AuthType:
+	  <ul>
+	    <li>
+	      NULL Auth Type, with a suggested value of 6.
+	    </li>
+	  </ul>
+	</t>
+      </section>
+      <section anchor="ietf-xml-registry" title="IETF XML Registry">
+	<t>Following the format in <xref target="RFC3688"/>, the following
+	registrations are requested:</t>
+	<t>
 	  <figure>
-            <artwork><![CDATA[URI: urn:ietf:params:xml:ns:yang:ietf-bfd-stability
+	    <artwork><![CDATA[URI: urn:ietf:params:xml:ns:yang:ietf-bfd-stability
 Registrant Contact: The IESG
 XML: N/A, the requested URI is an XML namespace.
 ]]>
 	    </artwork>
-          </figure>
+	  </figure>
 	</t>
       </section>
 
