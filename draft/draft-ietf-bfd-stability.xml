@@ -230,7 +230,7 @@
       Implementations will use sequence numbers (bfd.XmitAuthSeq) as defined in
       <xref target="RFC5880">BFD</xref>.</t>
 
-      <t>If bfd.AuthSeqKnown is 0, bfdAuthSeqKnown is set to 1, and
+      <t>If bfd.AuthSeqKnown is 0, bfd.AuthSeqKnown is set to 1, and
       bfd.RcvAuthSeq is set to the value of the received Sequence Number
       field.</t>
 
