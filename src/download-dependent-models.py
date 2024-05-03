@@ -1,15 +1,15 @@
 import os
 
 list_of_ietf_models =\
-[ ["ietf-crypto-types", "draft-ietf-netconf-crypto-types", "25"],
-  ["ietf-truststore", "draft-ietf-netconf-trust-anchors", "19"],
-  ["ietf-keystore", "draft-ietf-netconf-keystore", "26"],
-  ["ietf-tcp-common", "draft-ietf-netconf-tcp-client-server", "14"],
-  ["ietf-tcp-client", "draft-ietf-netconf-tcp-client-server", "14"],
-  ["ietf-tls-client", "draft-ietf-netconf-tls-client-server", "31"],
-  ["ietf-tls-common", "draft-ietf-netconf-tls-client-server", "31"],
-  ["ietf-tls-server", "draft-ietf-netconf-tls-client-server", "31"],
-  ["ietf-http-client", "draft-ietf-netconf-http-client-server", "11"] ]
+[ ["ietf-crypto-types", "draft-ietf-netconf-crypto-types", "34"],
+  ["ietf-truststore", "draft-ietf-netconf-trust-anchors", "20"],
+  ["ietf-keystore", "draft-ietf-netconf-keystore", "35"],
+  ["ietf-tcp-common", "draft-ietf-netconf-tcp-client-server", "26"],
+  ["ietf-tcp-client", "draft-ietf-netconf-tcp-client-server", "26"],
+  ["ietf-tls-client", "draft-ietf-netconf-tls-client-server", "41"],
+  ["ietf-tls-common", "draft-ietf-netconf-tls-client-server", "41"],
+  ["ietf-tls-server", "draft-ietf-netconf-tls-client-server", "41"],
+  ["ietf-http-client", "draft-ietf-netconf-http-client-server", "20"] ]
 
 
 def fetch_and_extract(draft, module, version):
