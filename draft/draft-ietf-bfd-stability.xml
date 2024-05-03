@@ -240,7 +240,7 @@
       Sequence Number.</t>
 
       <t>Unlike other authentication mechanisms defined for BFD that provide an
-      Auth Key/Digest field, when bfd.AuthSeqKnob is 1, the received Sequence
+      Auth Key/Digest field, when bfd.AuthSeqKnown is 1, the received Sequence
       Number MUST NOT be compared vs. bfd.RcvAuthSeq for purposes of discarding
       the BFD packets.</t>
     </section>
