@@ -104,6 +104,18 @@ module ietf-bfd-stability {
        monitored for frames lost.";
   }
 
+  grouping lost-packet-count {
+    leaf lost-packet-count {
+      type yang:counter32;
+      description
+        "Number of BFD packets that were lost without bringing the
+         session down. This counter should be present only if
+         stability is configured.";
+    }
+    description
+      "Grouping of statistics related to BFD stability.";
+  }
+
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bfd:bfd/bfd-ip-sh:ip-sh/" +
           "bfd-ip-sh:sessions/bfd-ip-sh:session" {
@@ -120,7 +132,7 @@ module ietf-bfd-stability {
     }
     description
       "Augment the 'bfd' container to add attributes related to BFD
-       stability.";
+       stability for IP Single Hop Sessions.";
   }
 
   augment "/rt:routing/rt:control-plane-protocols/" +
@@ -139,7 +151,7 @@ module ietf-bfd-stability {
     }
     description
       "Augment the 'bfd' container to add attributes related to BFD
-       stability.";
+       stability for Multi Hop Sessions.";
   }
 
   augment "/rt:routing/rt:control-plane-protocols/" +
@@ -158,7 +170,7 @@ module ietf-bfd-stability {
     }
     description
       "Augment the 'bfd' container to add attributes related to BFD
-       stability.";
+       stability for LAG session.";
   }
 
   augment "/rt:routing/rt:control-plane-protocols/" +
@@ -177,70 +189,46 @@ module ietf-bfd-stability {
     }
     description
       "Augment the 'bfd' container to add attributes related to BFD
-       stability.";
+       stability for MPLS.";
   }
 
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bfd:bfd/bfd-ip-sh:ip-sh/" +
           "bfd-ip-sh:sessions/bfd-ip-sh:session/" +
           "bfd-ip-sh:session-statistics" {
-    leaf lost-packet-count {
-      type yang:counter32;
-      description
-        "Number of BFD packets that were lost without bringing the
-         session down. This counter should be present only if
-         stability is configured.";
-    }
+    uses lost-packet-count;
     description
-      "Augment the 'bfd' container to add attributes related to BFD
-       stability.";
+      "Augment the 'bfd' container to add statistics related to BFD
+       stability for IP Single Hop Sessions.";
   }
 
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bfd:bfd/bfd-ip-mh:ip-mh/" +
           "bfd-ip-mh:session-groups/bfd-ip-mh:session-group/" +
           "bfd-ip-mh:sessions/bfd-ip-mh:session-statistics" {
-    leaf lost-packet-count {
-      type yang:counter32;
-      description
-        "Number of BFD packets that were lost without bringing the
-         session down. This counter should be present only if
-         stability is configured.";
-    }
+    uses lost-packet-count;
     description
-      "Augment the 'bfd' container to add attributes related to BFD
-       stability.";
+      "Augment the 'bfd' container to add statistics related to BFD
+       stability for IP Multi Hop Sessions.";
   }
 
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bfd:bfd/bfd-lag:lag/" +
           "bfd-lag:sessions/bfd-lag:session/bfd-lag:member-links/" +
           "bfd-lag:micro-bfd-ipv4/bfd-lag:session-statistics" {
-    leaf lost-packet-count {
-      type yang:counter32;
-      description
-        "Number of BFD packets that were lost without bringing the
-         session down. This counter should be present only if
-         stability is configured.";
-    }
+    uses lost-packet-count;
     description
-      "Augment the 'bfd' container to add attributes related to BFD
-       stability.";
+      "Augment the 'bfd' container to add statistics related to BFD
+       stability for Micro BFD sessions.";
   }
 
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bfd:bfd/bfd-mpls:mpls/" +
           "bfd-mpls:session-groups/bfd-mpls:session-group/" +
           "bfd-mpls:sessions/bfd-mpls:session-statistics" {
-    leaf lost-packet-count {
-      type yang:counter32;
-      description
-        "Number of BFD packets that were lost without bringing the
-         session down. This counter should be present only if
-         stability is configured.";
-    }
+    uses lost-packet-count;
     description
-      "Augment the 'bfd' container to add attributes related to BFD
-       stability.";
+      "Augment the 'bfd' container to add statistics related to BFD
+       stability for MPLS sessions.";
   }
 }
