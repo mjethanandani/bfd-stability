@@ -219,7 +219,17 @@ module ietf-bfd-stability {
     uses lost-packet-count;
     description
       "Augment the 'bfd' container to add statistics related to BFD
-       stability for Micro BFD sessions.";
+       stability for Micro BFD sessions for IPv4.";
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bfd:bfd/bfd-lag:lag/" +
+          "bfd-lag:sessions/bfd-lag:session/bfd-lag:member-links/" +
+          "bfd-lag:micro-bfd-ipv6/bfd-lag:session-statistics" {
+    uses lost-packet-count;
+    description
+      "Augment the 'bfd' container to add statistics related to BFD
+       stability for Micro BFD sessions for IPv6.";
   }
 
   augment "/rt:routing/rt:control-plane-protocols/" +
