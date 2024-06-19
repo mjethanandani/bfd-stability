@@ -51,6 +51,12 @@ module ietf-bfd-stability {
        Forwarding Detection.";
   }
 
+  import ietf-key-chain {
+    prefix key-chain;
+    reference
+      "RFC 8177: YANG Key Chain.";
+  }
+
   organization
     "IETF BFD Working Group";
 
@@ -95,13 +101,21 @@ module ietf-bfd-stability {
     description
       "Initial Version.";
     reference
-      "RFC XXXX, BFD Stability.";
+      "RFC XXXX: BFD Stability.";
   }
 
   feature stability {
     description
       "If supported, the feature allows for BFD sessions to be
        monitored for frames lost.";
+  }
+
+  identity null-auth {
+    base key-chain:crypto-algorithm;
+    description
+      "BFD Null Auth type defined in this draft.";
+    reference
+      "RFC XXXX: BFD Stability.";
   }
 
   grouping lost-packet-count {
