@@ -517,6 +517,20 @@ reference:    RFC XXXX
           </figure>
 	</t>
       </section>
+            <section anchor="example-a.1.2" title="Use of NULL Auth">
+	<t>
+          This example demonstrates how to configure NULL Auth
+          to enable monitoring of a session for stability.
+	</t>
+	<t>
+          <figure>
+            <artwork><![CDATA[
+            INSERT_TEXT_FROM_FILE(../src/yang/example-bfd-stability-a.1.2.xml,68)
+            ]]>
+            </artwork>
+          </figure>
+	</t>
+      </section>
     </section>
   </back>
 </rfc>
