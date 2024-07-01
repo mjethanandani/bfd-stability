@@ -106,7 +106,8 @@ module ietf-bfd-stability {
 
   grouping lost-packet-count {
     leaf lost-packet-count {
-      type yang:counter32;
+      if-feature "stability";
+      type yang:counter64;
       description
         "Number of BFD packets that were lost without bringing the
          session down. This counter should be present only if

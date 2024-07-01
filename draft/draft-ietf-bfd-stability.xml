@@ -280,7 +280,7 @@
 	</t>
       </section>
 
-      <section title="Out of Order Packets">
+      <section anchor="out-of-order-packets" title="Out of Order Packets">
         <t>
 	  Some transmission mechanisms - for example, Link Aggregate Groups
 	  (LAG), or Equal Cost Multipath (ECMP) - can result in out of order
@@ -414,10 +414,15 @@ reference:    RFC XXXX
 	</t>
 
 	<t>
-	  The model defines a read-only variables to indicate the number
-	  of packets that were lost. Access to this information may
-	  allow a malicious user information on which links are
-	  experiencing issues.
+	  The model defines a read-only node to indicate the number of
+	  packets that were lost. Access to this information may allow
+	  a malicious user information on which links are experiencing
+	  issues. In addition, and as stated in <xref
+	  target="out-of-order-packets">Out of Order Packets</xref>,
+	  on links such as LAG or ECMP, there is a possibility of
+	  packets being delivered out of order. A strict comparison of
+	  increasing sequence numbers may result in classifying those
+	  out of order packets as packet loss.
 	</t>
 
 	<t>The YANG module does not define any RPC operations.</t>
