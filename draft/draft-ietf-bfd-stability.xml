@@ -101,20 +101,6 @@
         <uri/>
       </address>
     </author>
-
-    <author fullname="Peng Fan" initials="P." surname="Fan">
-      <organization>China Mobile</organization>
-      <address>
-        <postal>
-          <street>32 Xuanwumen West Street</street>
-          <city>Beijing</city>
-          <region>Beijing</region>
-          <country>China</country>
-        </postal>
-        <email>fanp08@gmail.com</email>
-      </address>
-    </author>
-
     <date/>
 
     <abstract>
@@ -452,15 +438,17 @@ reference:    RFC XXXX
 	The authors of this document would like to acknowledge Jeff
 	Haas as a contributor to this document. Jeff played a role not
 	only as a shepherd but also actively contributed to the
-	improvement of the document. In addition, Manav Bhatia also
-	contributed to this document.
+	improvement of the document. In addition, Manav Bhatia and
+	Peng Fang contributed to this document.
       </t>
     </section>
 
     <section title="Acknowledgements">
-      <t>Authors would like to thank Nobo Akiya, Jeffery Haas, Dileep Singh,
-      Basil Saji, Sagar Soni, Albert Fu and Mallik Mudigonda who also
-      contributed to this document.</t>
+      <t>
+	Authors would like to thank Nobo Akiya, Dileep Singh, Basil
+	Saji, Sagar Soni, Albert Fu and Mallik Mudigonda who also
+	contributed to this document.
+      </t>
     </section>
   </middle>
 
