@@ -445,9 +445,15 @@ reference:    RFC XXXX
 	to injection attacks.  BFD without authentication is vulnerable to
 	session resets; the NULL Auth type does not change this.</t>
 
-	<t>When the NULL Authentication type is used for BFD Stability purposes,
-	maliciously injected packets that do not reset the BFD session can
-	resemble high packet loss.</t>
+	<t>
+	  When the NULL Authentication type is used for BFD Stability
+	  purposes, maliciously injected packets that do not reset the
+	  BFD session can resemble high packet loss. Therefore,
+	  sessions where third parties are able inject malicious
+	  packets, such as, multi-hop routed paths, tunnels without
+	  authentication, or MPLS LSP should examine the packet
+	  loss count for possible attacks.
+	</t>
       </section>
     </section>
 
