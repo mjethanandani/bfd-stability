@@ -449,10 +449,10 @@ reference:    RFC XXXX
 	  When the NULL Authentication type is used for BFD Stability
 	  purposes, maliciously injected packets that do not reset the
 	  BFD session can resemble high packet loss. Therefore,
-	  sessions where third parties are able inject malicious
-	  packets, such as, multi-hop routed paths, tunnels without
-	  authentication, or MPLS LSP should examine the packet
-	  loss count for possible attacks.
+	  sessions such as, multi-hop routed paths, tunnels without
+	  authentication, or MPLS LSP, have security guarantees that
+	  are identical to situations where BFD is run without
+	  authentication.
 	</t>
       </section>
     </section>
