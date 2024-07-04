@@ -4,7 +4,7 @@
     xmlns:stability="urn:ietf:params:xml:ns:yang:ietf-bfd-stability">
   <key-chain>
     <name>bfd-stability-config</name>
-    <description>"An example for BFD Stabalized configuration."</description>
+    <description>"An example for BFD Stability configuration."</description>
     <key>
       <key-id>55</key-id>
       <lifetime>
