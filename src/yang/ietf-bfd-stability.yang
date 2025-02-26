@@ -122,8 +122,9 @@ module ietf-bfd-stability {
       if-feature "stability";
       type yang:counter64;
       description
-        "Number of BFD packets that were lost without bringing the
-         session down. This counter should be present only if
+        "Number of BFD packets that were lost, where loss is
+	 determined by the fact that the sequence number is
+	 not consecutive. This counter should be present only if
          stability is configured.";
     }
     description
