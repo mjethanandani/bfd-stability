@@ -374,17 +374,25 @@ reference:    RFC XXXX
 
     <section title="Security Consideration">
       <section title="YANG Security Considerations">
-	<t>The YANG module specified in this document defines a schema for data
-	that is designed to be accessed via network management protocols such as
-	<xref target="RFC6241">NETCONF</xref> or <xref
-	target="RFC8040">RESTCONF</xref>. The lowest NETCONF layer is the secure
-	transport layer, and the mandatory-to-implement secure transport is
-	<xref target="RFC6242">Secure Shell (SSH)</xref>. The lowest RESTCONF
-	layer is HTTPS, and the mandatory-to-implement secure transport is <xref
-	target="RFC8446">TLS</xref>. The <xref target="RFC8341">NETCONF Access
-	Control Model (NACM)</xref> provides the means to restrict access for
-	particular NETCONF or RESTCONF users to a preconfigured subset of all
-	available NETCONF or RESTCONF protocol operations and content.</t>
+	<t>
+	  The YANG module specified in this document defines a schema
+	  for data that is designed to be accessed via network
+	  management protocols such as <xref
+	  target="RFC6241">NETCONF</xref> or <xref
+	  target="RFC8040">RESTCONF</xref>. These YANG-based
+	  management protocols have to use a secure transport layer
+	  (e.g., <xref target="RFC4252">SSH</xref>, <xref
+	  target="RFC8446">TLS</xref>, and <xref
+	  target="RFC9000">QUIC</xref>) and have to use mutual
+	  authentication.
+	</t>
+	<t>
+	  The <xref target="RFC8341">NETCONF Access Control Model
+	  (NACM)</xref> provides the means to restrict access for
+	  particular NETCONF or RESTCONF users to a preconfigured
+	  subset of all available NETCONF or RESTCONF protocol
+	  operations and content.
+	</t>
 
 	<t>
 	  The YANG module does not define any
@@ -469,13 +477,13 @@ reference:    RFC XXXX
 
       <?rfc include='reference.RFC.3688.xml'?>
 
+      <?rfc include='reference.RFC.4252.xml'?>
+
       <?rfc include='reference.RFC.5880.xml'?>
 
       <?rfc include='reference.RFC.6020.xml'?>
 
       <?rfc include='reference.RFC.6241.xml'?>
-
-      <?rfc include='reference.RFC.6242.xml'?>
 
       <?rfc include='reference.RFC.6991.xml'?>
 
@@ -489,11 +497,13 @@ reference:    RFC XXXX
 
       <?rfc include='reference.RFC.8446.xml'?>
 
+      <?rfc include='reference.RFC.9000.xml'?>
+
       <?rfc include='reference.RFC.9314.xml'?>
+
       <?rfc include='reference.I-D.ietf-bfd-optimizing-authentication.xml'?>
 
       <?rfc include='reference.I-D.ietf-bfd-secure-sequence-numbers.xml'?>
-
 
     </references>
     <section anchor="examples" title="Examples">
