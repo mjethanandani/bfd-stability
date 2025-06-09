@@ -73,15 +73,15 @@ module ietf-bfd-stability {
 
   description
     "This YANG module augments the base BFD YANG model to add
-     attributes related to BFD Stability. In particular it adds a
-     a per session count for BFD packets that are lost.
+     attributes related to BFD Stability. In particular, it adds a
+     a per-session count for BFD packets that are lost.
 
      Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
      without modification, is permitted pursuant to, and subject to
-     the license terms contained in, the Revised BSD License set
+     the license terms contained in the Revised BSD License set
      forth in Section 4.c of the IETF Trust's Legal Provisions
      Relating to IETF Documents
      (https://trustee.ietf.org/license-info).
@@ -142,7 +142,7 @@ module ietf-bfd-stability {
       default false;
       description
         "If set to true, this enables the BFD session to monitor
-         for stability; i.e., to watch how many packets are getting
+         for stability, i.e., to watch how many packets are getting
          dropped.";
     }
     description
@@ -161,7 +161,7 @@ module ietf-bfd-stability {
       default false;
       description
         "If set to true, this enables the BFD session to monitor
-         for stability; i.e., to watch how many packets are getting
+         for stability, i.e., to watch how many packets are getting
          dropped.";
     }
     description
@@ -180,7 +180,7 @@ module ietf-bfd-stability {
       default false;
       description
         "If set to true, this enables the BFD session to monitor
-         for stability; i.e., to watch how many packets are getting
+         for stability, i.e., to watch how many packets are getting
          dropped.";
     }
     description
@@ -199,7 +199,7 @@ module ietf-bfd-stability {
       default false;
       description
         "If set to true, this enables the BFD session to monitor
-         for stability; i.e., to watch how many packets are getting
+         for stability, i.e., to watch how many packets are getting
          dropped.";
     }
     description
