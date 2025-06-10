@@ -122,25 +122,27 @@
       target="RFC5880">BFD</xref> is set to the smallest feasible value.</t>
 
       <t>
-	While <xref target="RFC5880">BFD</xref> does a fine job of
-	detecting loss of packets over a Detection Time, it misses
-	the more transient or benign form of instability that comes
-	from missing packets within the Detection Time. Those missed
-	packets are a valuable indicator of systemic issues or a
-	deteriorating network that may warrant preventive action.
+	A <xref target="RFC5880">BFD</xref> session will remain in the
+	Up state as long as it receives at least one packet within the
+	Detection Time interval. However, additional packet loss
+	within that time interval is not noted by the BFD state
+	machinery. Noting the other missed packets provides a valuable
+	indicator of systemic issues or a deteriorating network that
+	may warrant preventive action.
       </t>
       <t>
 	This document proposes an experimental mechanism to detect
 	lost packets in a BFD session in addition to the datapath
-	fault detection mechanisms of BFD.  Such a mechanism presents
-	significant value to measure the stability of BFD sessions and
-	provides data to the operators for the cause of a BFD
-	failure. The details of the motivation for experimental status
-	can be found in <xref
-	target="experimental-status"/>. Implementations can go further
-	and do on-the-box mapping of packet loss to time interval,
-	when the loss happened, and further analytics. But that is
-	outside the scope of this document.
+	fault detection mechanisms of BFD.  Such a mechanism, combined
+	with 'received-packet-count' defined in the <xref
+	target="RFC9314">YANG Data Model for Bidrectional Forward
+	Detection (BFD)</xref> permits operators to measure the
+	stability of BFD sessions. The details of the motivation for
+	experimental status can be found in <xref
+	target="experimental-status"/>. Implementations may also do
+	additional analysis of the packet loss over a time
+	interval. Such an analysis is outside the scope of this
+	document.
       </t>
 
       <t>
@@ -173,10 +175,10 @@
       target="RFC2119">RFC 2119</xref> and <xref target="RFC8174">RFC
       8174</xref>.</t>
 
-      <t>The reader is expected to be familiar with the <xref
-      target="RFC5880">BFD</xref> and <xref
-      target="I-D.ietf-bfd-secure-sequence-numbers">Meticulous Keyed
-      ISAAC for BFD Authentication</xref>.</t>
+      <t>
+	The reader is expected to be familiar with the <xref
+	target="RFC5880">BFD</xref>.
+      </t>
     </section>
 
     <section title="Use Cases">
@@ -184,11 +186,12 @@
 	Bidirectional Forwarding Detection, as defined in <xref
 	target="RFC5880">BFD</xref> cannot detect any BFD packet loss
 	if the loss does not last for the Detection Time. This
-	document proposes a method to detect a dropped packet on the
+	document proposes a method to detect dropped packet on the
 	receiver. For example, if the receiver receives BFD control
 	packet k at time t but receives packet k+3 at time t+10ms, and
 	never receives packet k+1 and/or k+2, then it has experienced
-	a drop.</t>
+	a packet loss.
+      </t>
 
       <t>This proposal enables BFD implementations to generate diagnostic
       information on the health of each BFD session that could be used to
@@ -215,8 +218,8 @@
 
     <section anchor="null-auth-type" title="NULL Auth Type">
       <t>
-	The NULL Authentication Type, defined here, can be used to
-	provide a meticulously increasing sequence number for
+	The NULL Authentication Type, defined in this document, can be
+	used to provide a meticulously increasing sequence number for
 	stability measurement.  It provides none of the protections
 	desired for authentication and is used only to provide BFD
 	stability services to BFD sessions that otherwise have no
@@ -420,8 +423,10 @@ reference:    RFC XXXX
 
     <section title="Security Considerations">
       <section title="BFD NULL Auth Security Considerations">
-	<t>Use of a BFD authentication mechanism that protects the BFD packets
-	is RECOMMENDED.</t>
+	<t>
+	  The use of a BFD authentication mechanism that protects the
+	  BFD packets is RECOMMENDED.
+	</t>
 
         <t>
 	  The Security Considerations of <xref target="RFC5880"/> for
