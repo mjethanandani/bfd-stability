@@ -104,9 +104,11 @@
     <date/>
 
     <abstract>
-      <t>This document describes extensions to the Bidirectional Forwarding
-      Detection (BFD) protocol to measure BFD stability. Specifically, it
-      describes a mechanism for detection of BFD packet loss.</t>
+      <t>
+	This document describes extensions to the Bidirectional
+	Forwarding Detection (BFD) protocol to measure BFD
+	stability. Specifically, it describes a mechanism for
+	the detection of BFD packet loss.</t>
     </abstract>
   </front>
 
@@ -119,15 +121,36 @@
       to a datapath failure, BFD session detection time as defined in <xref
       target="RFC5880">BFD</xref> is set to the smallest feasible value.</t>
 
-      <t>This document proposes a mechanism to detect lost packets in a BFD
-      session in addition to the datapath fault detection mechanisms of BFD.
-      Such a mechanism presents significant value to measure the stability of
-      BFD sessions and provides data to the operators for the cause of a BFD
-      failure.</t>
+      <t>
+	A <xref target="RFC5880">BFD</xref> session will remain in the
+	Up state as long as it receives at least one packet within the
+	Detection Time interval. However, additional packet loss
+	within that time interval is not noted by the BFD state
+	machinery. Noting the other missed packets provides a valuable
+	indicator of systemic issues or a deteriorating network that
+	may warrant preventive action.
+      </t>
+      <t>
+	This document proposes an experimental mechanism to detect
+	lost packets in a BFD session in addition to the datapath
+	fault detection mechanisms of BFD.  Such a mechanism, combined
+	with 'received-packet-count' defined in the <xref
+	target="RFC9314">YANG Data Model for Bidrectional Forward
+	Detection (BFD)</xref> permits operators to measure the
+	stability of BFD sessions. The details of the motivation for
+	experimental status can be found in <xref
+	target="experimental-status"/>. Implementations may also do
+	additional analysis of the packet loss over a time
+	interval. Such an analysis is outside the scope of this
+	document.
+      </t>
 
-      <t>This document does not propose any BFD extension to measure data
-      traffic loss or delay on a link or tunnel and the scope is limited to
-      BFD packets.</t>
+      <t>
+	This document does not propose any BFD extension to measure
+	data traffic loss or delay on a link or tunnel, and the scope
+	is limited to BFD packets.
+      </t>
+
       <section title="Note to the RFC Editor">
 	<t>
 	  This document uses several placeholder values throughout the
@@ -152,32 +175,37 @@
       target="RFC2119">RFC 2119</xref> and <xref target="RFC8174">RFC
       8174</xref>.</t>
 
-      <t>The reader is expected to be familiar with the <xref
-      target="RFC5880">BFD </xref>, <xref
-      target="I-D.ietf-bfd-optimizing-authentication">Optimizing BFD
-      Authentication </xref> and <xref
-      target="I-D.ietf-bfd-secure-sequence-numbers">Meticulous Keyed
-      ISAAC for BFD Authentication</xref>.</t>
+      <t>
+	The reader is expected to be familiar with the <xref
+	target="RFC5880">BFD</xref>.
+      </t>
     </section>
 
     <section title="Use Cases">
-      <t>Bidirectional Forwarding Detection as defined in <xref
-      target="RFC5880">BFD</xref> cannot detect any BFD packet loss if the
-      loss does not last for detection time. This document proposes a method
-      to detect a dropped packet on the receiver. For example, if the receiver
-      receives BFD control packet k at time t but receives packet k+3 at time
-      t+10ms, and never receives packet k+1 and/or k+2, then it has
-      experienced a drop.</t>
+      <t>
+	Bidirectional Forwarding Detection, as defined in <xref
+	target="RFC5880">BFD</xref> cannot detect any BFD packet loss
+	if the loss does not last for the Detection Time. This
+	document proposes a method to detect dropped packet on the
+	receiver. For example, if the receiver receives BFD control
+	packet k at time t but receives packet k+3 at time t+10ms, and
+	never receives packet k+1 and/or k+2, then it has experienced
+	a packet loss.
+      </t>
 
       <t>This proposal enables BFD implementations to generate diagnostic
       information on the health of each BFD session that could be used to
       preempt a failure on a datapath that BFD was monitoring by allowing time
       for a corrective action to be taken.</t>
 
-      <t>In a faulty datapath scenario, an operator can use BFD health
-      information to trigger delay and loss measurement OAM protocol
-      (Connectivity Fault Management (CFM) or Loss Measurement (LM)-Delay
-      Measurement (DM)) to further isolate the issue.</t>
+      <t>
+	In a faulty datapath scenario, an operator can use BFD health
+	information to trigger the delay and loss measurement OAM
+	protocol <xref target="Y-1731">Connectivity Fault Management
+	(CFM)</xref> or <xref target="RFC6374">Packet Loss and Delay
+	Measurement for MPLS Networks</xref> to further isolate the
+	issue.
+      </t>
     </section>
 
     <section title="Functionality">
@@ -189,11 +217,13 @@
     </section>
 
     <section anchor="null-auth-type" title="NULL Auth Type">
-      <t>The NULL Authentication Type, defined here, can be used to provide a
-      meticulously increasing sequence number for stability measurement.  It
-      provides none of the protections desired for authentication and is used
-      only to provide BFD stability services to BFD sessions that otherwise have
-      no authentication in use.</t>
+      <t>
+	The NULL Authentication Type, defined in this document, can be
+	used to provide a meticulously increasing sequence number for
+	stability measurement.  It provides none of the protections
+	desired for authentication and is used only to provide BFD
+	stability services to BFD sessions that otherwise have no
+	authentication in use.</t>
 
       <t>If the Authentication Present (A) bit is set in the header, and the
       Authentication Type field contains TBD, the Authentication section has the
@@ -218,10 +248,12 @@
 	(NULL, to be assigned by IANA, with a suggested value of 6).
       </t>
 
-      <t>Auth Len: The length of the NULL Auth Type, in bytes; i.e. 8 bytes</t>
+      <t>Auth Len: The length of the NULL Auth Type, in bytes; i.e., 8 bytes</t>
 
-      <t>Auth Key ID: The authentication key ID in use for this packet. Must
-      be set to zero and ignored on receipt.</t>
+      <t>
+	Auth Key ID: The authentication key ID in use for this
+	packet. MUST be set to zero and ignored on receipt.
+      </t>
 
       <t>Reserved: This byte MUST be set to zero on transmit and ignored on
       receipt.</t>
@@ -271,13 +303,15 @@
 	  successive control packet generated on a BFD session by the
 	  transmitter is incremented by one. This loss count can then
 	  be exposed using the YANG module defined in the subsequent
-	  section.
+	  section. See discussion on <xref
+	  target="out-of-order-packets">Out of Order Packets</xref>
+	  later in the document.
 	</t>
 
         <t>
 	  The first BFD authentication section with a non-zero
 	  sequence number, in a valid BFD control packet, processed by
-	  the receiver is used for bootstrapping the logic.
+	  the receiver, is used for bootstrapping the logic.
 	</t>
       </section>
 
@@ -291,9 +325,9 @@
 	  loss.
 	</t>
 	<t>
-	  Implementations MAY provide mechanisms wherein all expected packets
-	  received across an expected interval but delivered out of order are
-	  not considered lost packets.
+	  Implementations MAY provide mechanisms wherein all expected
+	  packets received across an expected interval, but delivered
+	  out of order are not considered lost packets.
 	</t>
       </section>
     </section>
@@ -387,7 +421,41 @@ reference:    RFC XXXX
       </section>
     </section>
 
-    <section title="Security Consideration">
+    <section title="Security Considerations">
+      <section title="BFD NULL Auth Security Considerations">
+	<t>
+	  The use of a BFD authentication mechanism that protects the
+	  BFD packets is RECOMMENDED.
+	</t>
+
+        <t>
+	  The Security Considerations of <xref target="RFC5880"/> for
+	  unauthenticated BFD all apply to the new NULL authentication
+	  type.  The NULL Authentication type, defined in this
+	  document, provides none of the properties desired for
+	  authenticating BFD packets.  It is intended to provide BFD
+	  sessions that otherwise would not use authentication, a
+	  sequence number that can be used for purposes of detecting
+	  lost packets.
+	</t>
+
+	<t>
+	  The lack of a computed AuthKey/Digest over the BFD packet,
+	  but the presence of a Sequence Number makes this
+	  authentication type susceptible to injection attacks.  BFD
+	  without authentication is vulnerable to session resets; the
+	  NULL Auth type does not change this.</t>
+
+	<t>
+	  When the NULL Authentication type is used for BFD Stability
+	  purposes, maliciously injected packets that do not reset the
+	  BFD session can resemble high packet loss. Sessions such as
+	  multi-hop routed paths, tunnels without authentication, or
+	  MPLS LSP, therefore, have security guarantees that are
+	  identical to situations where BFD is run without
+	  authentication.
+	</t>
+      </section>
       <section title="YANG Security Considerations">
 	<t>
 	  The YANG module specified in this document defines a schema
@@ -435,34 +503,6 @@ reference:    RFC XXXX
 	</t>
 
 	<t>The YANG module does not define any RPC operations.</t>
-      </section>
-
-      <section title="BFD NULL Auth Security Considerations">
-	<t>Use of a BFD authentication mechanism that protects the BFD packets
-	is RECOMMENDED.</t>
-
-        <t>The Security Considerations of <xref target="RFC5880"/> for
-	unauthenticated BFD all apply to the new NULL authentication type.
-	The NULL Authentication type, defined in this document, provides none
-	of the properties desired for authenticating BFD packets.  It is
-	intended to provide BFD sessions that otherwise would not use
-	authentication a sequence number that can be used for purposes of
-	detecting lost packets.</t>
-
-	<t>The lack of a computed AuthKey/Digest over the BFD packet but the
-	presence of a Sequence Number makes this authentication type susceptible
-	to injection attacks.  BFD without authentication is vulnerable to
-	session resets; the NULL Auth type does not change this.</t>
-
-	<t>
-	  When the NULL Authentication type is used for BFD Stability
-	  purposes, maliciously injected packets that do not reset the
-	  BFD session can resemble high packet loss. Sessions such as,
-	  multi-hop routed paths, tunnels without authentication, or
-	  MPLS LSP, therefore, have security guarantees that are
-	  identical to situations where BFD is run without
-	  authentication.
-	</t>
       </section>
     </section>
 
@@ -519,12 +559,45 @@ reference:    RFC XXXX
       <?rfc include='reference.RFC.9000.xml'?>
 
       <?rfc include='reference.RFC.9314.xml'?>
-
-      <?rfc include='reference.I-D.ietf-bfd-optimizing-authentication.xml'?>
-
+    </references>
+    <references title="Informative References">
+      <?rfc include='reference.RFC.6374.xml'?>
       <?rfc include='reference.I-D.ietf-bfd-secure-sequence-numbers.xml'?>
+      <reference anchor="Y-1731">
+        <front>
+          <title>
+	    OAM Functions and Mechanisms for Ethernet-based Networks
+	  </title>
+          <author>
+            <organization>ITU-T</organization>
+          </author>
+	  <date month="November" year="2013"/>
+	</front>
+	<seriesInfo name="Recommendation" value="G.8013/Y.1731"/>
+      </reference>
 
     </references>
+    <section anchor="experimental-status" title="Experimental Status">
+      <t>
+	This document describes an experiment that will present a
+	candidate solution to predict whether a given <xref
+	target="RFC5880">BFD</xref> session will continue to be
+	stable. The experiment will use the packet lost count and the
+	'received-packet-count' defined in the <xref
+	target="RFC9314">YANG Data Model for Bidrectional Forward
+	Detection (BFD)</xref> to determine how stable is the
+	session. The reason why this document is on an
+	Experimental track is because there are no known
+	implementations or proof-of-concept. As a result, the authors
+	are not clear whether a simple lost count is enough to predict
+	the stability or there will be a need to have a more granular
+	count.
+      </t>
+      <t>
+	This document is classified as Experimental and is not part of
+	the IETF Standards Track.
+      </t>
+    </section>
     <section anchor="examples" title="Examples">
       <t>
 	This section tries to show some examples in how the model can
