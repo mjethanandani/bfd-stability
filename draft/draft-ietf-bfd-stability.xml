@@ -162,7 +162,7 @@
 	  at the time of publication.
 	</t>
         <t>
-	  YYYY-MM-DD with the actual date of the publication of this
+	  YYYY-MM-DD, with the actual date of the publication of this
 	  document.
 	</t>
       </section>
@@ -186,7 +186,7 @@
 	Bidirectional Forwarding Detection, as defined in <xref
 	target="RFC5880">BFD</xref> cannot detect any BFD packet loss
 	if the loss does not last for the Detection Time. This
-	document proposes a method to detect dropped packet on the
+	document proposes a method to detect dropped packets on the
 	receiver. For example, if the receiver receives BFD control
 	packet k at time t but receives packet k+3 at time t+10ms, and
 	never receives packet k+1 and/or k+2, then it has experienced
@@ -406,9 +406,12 @@ XML: N/A, the requested URI is an XML namespace.
       </section>
 
       <section title="The &quot;YANG Module Names&quot; Registry">
-        <t>This document registers one YANG modules in the "YANG Module Names"
-        registry <xref target="RFC6020"/>. Following the format in <xref
-        target="RFC6020"/>, the following registrations are requested:</t>
+        <t>
+	  This document registers one YANG module in the "YANG Module
+	  Names" registry <xref target="RFC6020"/>. Following the
+	  format in <xref target="RFC6020"/>, the following
+	  registrations are requested:
+        </t>
 
         <t><figure>
             <artwork><![CDATA[
@@ -497,7 +500,7 @@ reference:    RFC XXXX
 	  issues. In addition, and as stated in <xref
 	  target="out-of-order-packets">Out of Order Packets</xref>,
 	  on links such as LAG or ECMP, there is a possibility of
-	  packets being delivered out of order. A strict comparison of
+	  packets being delivered out-of-order. A strict comparison of
 	  increasing sequence numbers may result in classifying those
 	  out of order packets as packet loss.
 	</t>
@@ -584,7 +587,7 @@ reference:    RFC XXXX
 	target="RFC5880">BFD</xref> session will continue to be
 	stable. The experiment will use the packet lost count and the
 	'received-packet-count' defined in the <xref
-	target="RFC9314">YANG Data Model for Bidrectional Forward
+	target="RFC9314">YANG Data Model for Bidirectional Forward
 	Detection (BFD)</xref> to determine how stable is the
 	session. The reason why this document is on an
 	Experimental track is because there are no known

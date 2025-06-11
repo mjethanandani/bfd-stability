@@ -76,7 +76,7 @@ module ietf-bfd-stability {
      attributes related to BFD Stability. In particular, it adds a
      a per-session count for BFD packets that are lost.
 
-     Copyright (c) 2024 IETF Trust and the persons identified as
+     Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
