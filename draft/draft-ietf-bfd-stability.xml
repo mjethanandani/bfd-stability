@@ -69,7 +69,7 @@
     </author>
 
     <author fullname="Santosh Pallagatti" initials="S" surname="Pallagatti">
-      <organization>VMware</organization>
+      <organization>Zscaler</organization>
       <address>
         <postal>
           <street/>
@@ -219,7 +219,7 @@
     <section anchor="null-auth-type" title="NULL Auth Type">
       <t>
 	The NULL Authentication Type, defined in this document, can be
-	used to provide a monotonically increasing sequence number for
+	used to provide a meticulously increasing sequence number for
 	stability measurement.  It provides none of the protections
 	desired for authentication and is used only to provide BFD
 	stability services to BFD sessions that otherwise have no
@@ -266,12 +266,11 @@
       <t>Valid BFD packet with sequence number in NULL auth will set 
       bfd.AuthSeqKnown to 1 if it was 0, and bfd.RcvAuthSeq is set
       to the value of the received Sequence Number field as defined in 
-      <xref target="RFC5880">BFD</xref>.</t>
+      <xref target="RFC5880" section="6.8.1">BFD</xref>.</t>
 
       <t>If bfd.AuthSeqKnown is 1, and the received Sequence Number field is not
       equal to bfd.RcvAuthSeq + 1 (in a circular number space), then the loss
-      count is incremented by number of BFD packet missed (difference between 
-      receive sequence number and bfd.RcvAuthSeq) and bfd.RcvAuthSeq is set to the received
+      count is incremented by one and bfd.RcvAuthSeq is set to the received
       Sequence Number.</t>
 
       <t>Unlike other authentication mechanisms defined for BFD that provide an
