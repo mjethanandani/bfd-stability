@@ -219,7 +219,7 @@
     <section anchor="null-auth-type" title="NULL Auth Type">
       <t>
 	The NULL Authentication Type, defined in this document, can be
-	used to provide a meticulously increasing sequence number for
+	used to provide a monotonically increasing sequence number for
 	stability measurement.  It provides none of the protections
 	desired for authentication and is used only to provide BFD
 	stability services to BFD sessions that otherwise have no
@@ -263,13 +263,15 @@
       Implementations will use sequence numbers (bfd.XmitAuthSeq) as defined in
       <xref target="RFC5880">BFD</xref>.</t>
 
-      <t>If bfd.AuthSeqKnown is 0, bfd.AuthSeqKnown is set to 1, and
-      bfd.RcvAuthSeq is set to the value of the received Sequence Number
-      field.</t>
+      <t>Valid BFD packet with sequence number in NULL auth will set 
+      bfd.AuthSeqKnown to 1 if it was 0, and bfd.RcvAuthSeq is set
+      to the value of the received Sequence Number field as defined in 
+      <xref target="RFC5880">BFD</xref>.</t>
 
       <t>If bfd.AuthSeqKnown is 1, and the received Sequence Number field is not
       equal to bfd.RcvAuthSeq + 1 (in a circular number space), then the loss
-      count is incremented by one and bfd.RcvAuthSeq is set to the received
+      count is incremented by number of BFD packet missed (difference between 
+      receive sequence number and bfd.RcvAuthSeq) and bfd.RcvAuthSeq is set to the received
       Sequence Number.</t>
 
       <t>Unlike other authentication mechanisms defined for BFD that provide an
@@ -286,10 +288,11 @@
 
       <t>
 	When using MD5 or SHA authentication, BFD MUST use an
-	authentication type (bfd.AuthType) that is of type meticulous.
-	Other authentication types that provide for meticulously increasing
-	sequence numbers can also be used.  This includes the NULL
-	authentication mechanism defined in this document or 
+	authentication type (bfd.AuthType) that is of type 
+    Meticulous Keyed MD5 Authentication, Meticulous Keyed SHA1 as defined
+    in <xref target="RFC5880">BFD</xref> or other authentication types
+    that provide for meticulously increasing sequence numbers can also be used.
+    This includes the NULL authentication mechanism defined in this document or 
 	<xref target="I-D.ietf-bfd-secure-sequence-numbers">Meticulous Keyed
 	ISAAC for BFD Authentication</xref>.
       </t>
