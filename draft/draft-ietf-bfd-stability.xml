@@ -69,7 +69,7 @@
     </author>
 
     <author fullname="Santosh Pallagatti" initials="S" surname="Pallagatti">
-      <organization>VMware</organization>
+      <organization>Zscaler</organization>
       <address>
         <postal>
           <street/>
@@ -263,9 +263,10 @@
       Implementations will use sequence numbers (bfd.XmitAuthSeq) as defined in
       <xref target="RFC5880">BFD</xref>.</t>
 
-      <t>If bfd.AuthSeqKnown is 0, bfd.AuthSeqKnown is set to 1, and
-      bfd.RcvAuthSeq is set to the value of the received Sequence Number
-      field.</t>
+      <t>Valid BFD packet with sequence number in NULL auth will set 
+      bfd.AuthSeqKnown to 1 if it was 0, and bfd.RcvAuthSeq is set
+      to the value of the received Sequence Number field as defined in 
+      <xref target="RFC5880" section="6.8.1">BFD</xref>.</t>
 
       <t>If bfd.AuthSeqKnown is 1, and the received Sequence Number field is not
       equal to bfd.RcvAuthSeq + 1 (in a circular number space), then the loss
@@ -286,10 +287,11 @@
 
       <t>
 	When using MD5 or SHA authentication, BFD MUST use an
-	authentication type (bfd.AuthType) that is of type meticulous.
-	Other authentication types that provide for meticulously increasing
-	sequence numbers can also be used.  This includes the NULL
-	authentication mechanism defined in this document or 
+	authentication type (bfd.AuthType) that is of type 
+    Meticulous Keyed MD5 Authentication, Meticulous Keyed SHA1 as defined
+    in <xref target="RFC5880">BFD</xref> or other authentication types
+    that provide for meticulously increasing sequence numbers can also be used.
+    This includes the NULL authentication mechanism defined in this document or 
 	<xref target="I-D.ietf-bfd-secure-sequence-numbers">Meticulous Keyed
 	ISAAC for BFD Authentication</xref>.
       </t>
