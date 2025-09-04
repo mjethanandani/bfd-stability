@@ -419,7 +419,7 @@ XML: N/A, the requested URI is an XML namespace.
             <artwork><![CDATA[
 name:         ietf-bfd-stability
 namespace:    urn:ietf:params:xml:ns:yang:ietf-bfd-stability
-prefix:       bfds
+prefix:       bfd-s
 reference:    RFC XXXX
 ]]></artwork>
           </figure></t>
@@ -547,11 +547,7 @@ reference:    RFC XXXX
 
       <?rfc include='reference.RFC.6020.xml'?>
 
-      <?rfc include='reference.RFC.6241.xml'?>
-
       <?rfc include='reference.RFC.6991.xml'?>
-
-      <?rfc include='reference.RFC.8040.xml'?>
 
       <?rfc include='reference.RFC.8174.xml'?>
 
@@ -559,14 +555,14 @@ reference:    RFC XXXX
 
       <?rfc include='reference.RFC.8349.xml'?>
 
-      <?rfc include='reference.RFC.8446.xml'?>
-
-      <?rfc include='reference.RFC.9000.xml'?>
-
       <?rfc include='reference.RFC.9314.xml'?>
     </references>
     <references title="Informative References">
+      <?rfc include='reference.RFC.6241.xml'?>
       <?rfc include='reference.RFC.6374.xml'?>
+      <?rfc include='reference.RFC.8040.xml'?>
+      <?rfc include='reference.RFC.8446.xml'?>
+      <?rfc include='reference.RFC.9000.xml'?>
       <?rfc include='reference.I-D.ietf-bfd-secure-sequence-numbers.xml'?>
       <reference anchor="Y-1731">
         <front>
