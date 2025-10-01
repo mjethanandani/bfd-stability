@@ -73,7 +73,7 @@ module ietf-bfd-stability {
 
   description
     "This YANG module augments the base BFD YANG model to add
-     attributes related to the experiment of BFD Stability.
+     experimental attributes related to BFD Stability.
      In particular, it adds a per-session count for BFD packets
      that are lost.
 
