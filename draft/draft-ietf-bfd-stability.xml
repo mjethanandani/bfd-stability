@@ -123,7 +123,7 @@
 
       <t>
 	A <xref target="RFC5880">BFD</xref> session will remain in the
-	Up state as long as it receives at least one packet within the
+	Up state as long as it receives at least one BFD packet within the
 	Detection Time interval. However, additional packet loss
 	within that time interval is not noted by the BFD state
 	machinery. Noting the other missed packets provides a valuable
@@ -210,7 +210,7 @@
 
     <section title="Functionality">
       <t>
-	The functionality proposed for BFD stability measurement is
+	The functionality proposed for BFD stability measurement may be
 	achieved by configuring the 'stability' flag in the attached
 	YANG model in conjunction with any BFD Meticulous Authentication.
       </t>
@@ -225,9 +225,10 @@
 	stability services to BFD sessions that otherwise have no
 	authentication in use.</t>
 
-      <t>If the Authentication Present (A) bit is set in the header, and the
-      Authentication Type field contains TBD, the Authentication section has the
-      following format:
+      <t>If the Authentication Present (A) bit is set in the header
+      as defined in <xref target="RFC5880" section="4">BFD</xref>,
+      and the Authentication Type field contains TBD, the
+      Authentication section has the following format:
       <figure
           align="center" title="NULL Auth Type">
         <artwork><![CDATA[
@@ -286,7 +287,7 @@
       </t>
 
       <t>
-	When using MD5 or SHA authentication, BFD MUST use an
+	When using MD5 or SHA1 authentication, BFD MUST use an
 	authentication type (bfd.AuthType) that is of type 
     Meticulous Keyed MD5 Authentication, Meticulous Keyed SHA1 as defined
     in <xref target="RFC5880">BFD</xref> or other authentication types
