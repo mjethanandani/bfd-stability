@@ -1,7 +1,7 @@
 module ietf-bfd-stability {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-bfd-stability";
-  prefix "bfds";
+  prefix "bfd-s";
 
   import ietf-yang-types {
     prefix "yang";
@@ -73,8 +73,9 @@ module ietf-bfd-stability {
 
   description
     "This YANG module augments the base BFD YANG model to add
-     attributes related to BFD Stability. In particular, it adds a
-     a per-session count for BFD packets that are lost.
+     experimental attributes related to BFD Stability.
+     In particular, it adds a per-session count for BFD packets
+     that are lost.
 
      Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -105,8 +106,8 @@ module ietf-bfd-stability {
 
   feature stability {
     description
-      "If supported, the feature allows for BFD sessions to be
-       monitored for packets lost.";
+      "This feature enables BFD sessions to be monitored for lost
+       packets.";
   }
 
   identity null-auth {

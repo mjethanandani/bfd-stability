@@ -349,12 +349,13 @@
     <section anchor="yang-module" title="Stability YANG Module">
       <section anchor="data-model-overview" title="Data Model Overview">
         <t>
-	  This YANG module augments the "ietf-bfd" module to add a
-	  flag 'stability' to enable this feature. The feature
-	  statement 'stability' needs to be enabled to indicate that
-	  BFD Stability is supported by the implementation. In
-	  addition, a loss count per-session or lsp for BFD packets
-	  that are lost has also been added in this model.
+	  This YANG module augments the base BFD YANG module to add
+	  attributes such as the flag 'stability' related
+	  to the experiment of BFD Stability. The feature statement
+	  'stability' needs to be enabled to indicate that BFD
+	  Stability is supported by the implementation. In addition, a
+	  loss count per-session or lsp for BFD packets that are lost
+	  has also been added in this model.
 	</t>
 
         <t>
@@ -369,10 +370,11 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bfd-stability@YYYY-MM-DD-tree.txt,69)
 
       <section title="YANG Module">
         <t>
-	  This YANG module imports <xref target="RFC6991">Common YANG
-	  Types</xref>, <xref target="RFC8349">A YANG Data Model for
-	  Routing</xref>, and <xref target="RFC9314">YANG Data Model
-	  for Bidirectional Forwading Detection (BFD)</xref>.
+	  This YANG module imports modules defined in <xref
+	  target="RFC6991">Common YANG Types</xref>, <xref
+	  target="RFC8349">A YANG Data Model for Routing</xref>, and
+	  <xref target="RFC9314">YANG Data Model for Bidirectional
+	  Forwading Detection (BFD)</xref>.
 	</t>
 
         <t>
@@ -431,7 +433,7 @@ XML: N/A, the requested URI is an XML namespace.
             <artwork><![CDATA[
 name:         ietf-bfd-stability
 namespace:    urn:ietf:params:xml:ns:yang:ietf-bfd-stability
-prefix:       bfds
+prefix:       bfd-s
 reference:    RFC XXXX
 ]]></artwork>
           </figure></t>
@@ -559,11 +561,7 @@ reference:    RFC XXXX
 
       <?rfc include='reference.RFC.6020.xml'?>
 
-      <?rfc include='reference.RFC.6241.xml'?>
-
       <?rfc include='reference.RFC.6991.xml'?>
-
-      <?rfc include='reference.RFC.8040.xml'?>
 
       <?rfc include='reference.RFC.8174.xml'?>
 
@@ -571,14 +569,14 @@ reference:    RFC XXXX
 
       <?rfc include='reference.RFC.8349.xml'?>
 
-      <?rfc include='reference.RFC.8446.xml'?>
-
-      <?rfc include='reference.RFC.9000.xml'?>
-
       <?rfc include='reference.RFC.9314.xml'?>
     </references>
     <references title="Informative References">
+      <?rfc include='reference.RFC.6241.xml'?>
       <?rfc include='reference.RFC.6374.xml'?>
+      <?rfc include='reference.RFC.8040.xml'?>
+      <?rfc include='reference.RFC.8446.xml'?>
+      <?rfc include='reference.RFC.9000.xml'?>
       <?rfc include='reference.I-D.ietf-bfd-secure-sequence-numbers.xml'?>
       <reference anchor="Y-1731">
         <front>
