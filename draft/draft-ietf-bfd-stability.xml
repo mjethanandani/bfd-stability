@@ -177,7 +177,12 @@
 
       <t>
 	The reader is expected to be familiar with the <xref
-	target="RFC5880">BFD</xref>.
+	target="RFC5880">BFD</xref>. In particular, the term
+	'meticulous' specified in <xref
+	target="I-D.ietf-bfd-secure-sequence-numbers">Meticulous Keyed
+	ISAAC for BFD Optimized Authentication</xref> means that the
+	Sequence number is incremented on every new packet that is
+	sent.
       </t>
     </section>
 
@@ -263,20 +268,36 @@
       Implementations will use sequence numbers (bfd.XmitAuthSeq) as defined in
       <xref target="RFC5880">BFD</xref>.</t>
 
-      <t>Valid BFD packet with sequence number in NULL auth will set 
-      bfd.AuthSeqKnown to 1 if it was 0, and bfd.RcvAuthSeq is set
-      to the value of the received Sequence Number field as defined in 
-      <xref target="RFC5880" section="6.8.1">BFD</xref>.</t>
+      <t>
+	If bfd.AuthSeqKnown is 1, and the received Sequence Number
+	field is not equal to bfd.RcvAuthSeq + 1 (in a circular number
+	space), then the loss count is incremented by the difference
+	between the received Sequence Number and bfd.RcvAuthSeq and
+	bfd.RcvAuthSeq is set to the received Sequence Number.
+      </t>
 
-      <t>If bfd.AuthSeqKnown is 1, and the received Sequence Number field is not
-      equal to bfd.RcvAuthSeq + 1 (in a circular number space), then the loss
-      count is incremented by one and bfd.RcvAuthSeq is set to the received
-      Sequence Number.</t>
+      <t>
+	Otherwise (bfd.AuthSeqKnown is 0), bfd.AuthSeqKnown MUST be
+	set to 1, and bfd.RcvAuthSeq MUST be set to the value of the
+	received Sequence Number field as defined in <xref
+	target="RFC5880" sectionFormat="comma"
+	section="6.8.1">BFD</xref>, and the packet MUST
+	be accepted.
+      </t>
 
-      <t>Unlike other authentication mechanisms defined for BFD that provide an
-      Auth Key/Digest field, when bfd.AuthSeqKnown is 1, the received Sequence
-      Number MUST NOT be compared vs. bfd.RcvAuthSeq for purposes of discarding
-      the BFD packets.</t>
+      <t>
+	According to <xref target="RFC5880" sectionFormat="comma"
+	section="6.7.3">BFD</xref> a receiver MUST discard a received
+	packet that lies outside the range of bfd.RcvAuthSeq and
+	bfd.RcvAuthSeq + (3 * Detect Multi). In case of NULL
+	authentication where packets containing sequence numbers are
+	accepted on receipt, an attacker with unauthenticated sequence
+	number could move the Sequence Number forward. Meanwhile, the
+	actual BFD neighbor that continues to send packets will find
+	them discarded and the session would drop. To prevent such an
+	attack, the received Sequence Number MUST NOT be compared with
+	bfd.RcvAuthSeq for purposes of discarding the BFD packets.
+      </t>
     </section>
 
     <section title="Theory of Operation">
@@ -287,12 +308,13 @@
 
       <t>
 	When using MD5 or SHA authentication, BFD MUST use an
-	authentication type (bfd.AuthType) that is of type 
-    Meticulous Keyed MD5 Authentication, Meticulous Keyed SHA1 as defined
-    in <xref target="RFC5880">BFD</xref> or other authentication types
-    that provide for meticulously increasing sequence numbers can also be used.
-    This includes the NULL authentication mechanism defined in this document or 
-	<xref target="I-D.ietf-bfd-secure-sequence-numbers">Meticulous Keyed
+	authentication type (bfd.AuthType) that is of type Meticulous
+	Keyed MD5 Authentication, Meticulous Keyed SHA1 as defined in
+	<xref target="RFC5880">BFD</xref> or other authentication
+	types that provide for meticulously increasing sequence
+	numbers can also be used.  This includes the NULL
+	authentication mechanism defined in this document or <xref
+	target="I-D.ietf-bfd-secure-sequence-numbers">Meticulous Keyed
 	ISAAC for BFD Authentication</xref>.
       </t>
 
