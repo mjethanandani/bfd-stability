@@ -123,7 +123,7 @@
 
       <t>
 	A <xref target="RFC5880">BFD</xref> session will remain in the
-	Up state as long as it receives at least one packet within the
+	Up state as long as it receives at least one BFD packet within the
 	Detection Time interval. However, additional packet loss
 	within that time interval is not noted by the BFD state
 	machinery. Noting the other missed packets provides a valuable
@@ -215,9 +215,20 @@
 
     <section title="Functionality">
       <t>
-	The functionality proposed for BFD stability measurement is
-	achieved by configuring the 'stability' flag in the attached
-	YANG model in conjunction with any BFD Meticulous Authentication.
+        BFD stability measurement requires that a BFD Meticulous Authentication
+        type is configured.
+      </t>
+      <t>
+        The ietf-bfd-stability YANG model, defined in this document, provides
+        the ability to configure BFD stability measurement for BFD sessions by
+        configuring the 'stability' flag. The 'lost-packet-count' leaf permits
+        monitoring of stability issues as defined in this document for BFD
+        sessions that have the stability flag enabled.
+      </t>
+      <t>
+        The configuration of BFD stability measurement and monitoring using
+        other methods than the attached YANG model is out of scope from this
+        document.
       </t>
     </section>
 
@@ -230,9 +241,10 @@
 	stability services to BFD sessions that otherwise have no
 	authentication in use.</t>
 
-      <t>If the Authentication Present (A) bit is set in the header, and the
-      Authentication Type field contains TBD, the Authentication section has the
-      following format:
+      <t>If the Authentication Present (A) bit is set in the header
+      as defined in <xref target="RFC5880" section="4">BFD</xref>,
+      and the Authentication Type field contains TBD, the
+      Authentication section has the following format:
       <figure
           align="center" title="NULL Auth Type">
         <artwork><![CDATA[
