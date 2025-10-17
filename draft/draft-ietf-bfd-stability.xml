@@ -210,9 +210,20 @@
 
     <section title="Functionality">
       <t>
-	The functionality proposed for BFD stability measurement may be
-	achieved by configuring the 'stability' flag in the attached
-	YANG model in conjunction with any BFD Meticulous Authentication.
+        BFD stability measurement requires that a BFD Meticulous Authentication
+        type is configured.
+      </t>
+      <t>
+        The ietf-bfd-stability YANG model, defined in this document, provides
+        the ability to configure BFD stability measurement for BFD sessions by
+        configuring the 'stability' flag. The 'lost-packet-count' leaf permits
+        monitoring of stability issues as defined in this document for BFD
+        sessions that have the stability flag enabled.
+      </t>
+      <t>
+        The configuration of BFD stability measurement and monitoring using
+        other methods than the attached YANG model is out of scope from this
+        document.
       </t>
     </section>
 
