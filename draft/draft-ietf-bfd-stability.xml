@@ -322,19 +322,19 @@
       numbers include:</t>
 
       <ul>
-	<li>
-	  Meticulously Keyed MD5 and SHA1, defined in 
-	  <xref target="RFC5880"/>.
-	</li>
-	<li>
-	  Meticulously Keyed ISAAC, defined in
-	  <xref target="I-D.ietf-bfd-secure-sequence-numbers"/>.
-	</li>
-	<li>
-	  The NULL authentication mechanism, which does not provide for
-	  authentication but carries a meticulously increasing sequence number,
-	  defined in this document.
-	</li>
+        <li>
+          Meticulously Keyed MD5 and SHA1, defined in
+          <xref target="RFC5880"/>.
+        </li>
+        <li>
+          Meticulously Keyed ISAAC, defined in
+          <xref target="I-D.ietf-bfd-secure-sequence-numbers"/>.
+        </li>
+        <li>
+          The NULL authentication mechanism, which does not provide for
+          authentication but carries a meticulously increasing sequence number,
+          defined in this document.
+        </li>
       </ul>
 
       <t>
