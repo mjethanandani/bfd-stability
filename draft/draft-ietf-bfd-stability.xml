@@ -276,12 +276,12 @@
 
       <t>
 	Auth Key ID (8 bits): The authentication key ID in use for this
-	packet. MUST be set to zero and ignored on receipt.
+	packet. MUST be set to zero and MUST be ignored on receipt.
       </t>
 
       <t>
 	Reserved (8 bits): This byte MUST be set to zero on transmit
-	and ignored on receipt.
+	and MUST be ignored on receipt.
       </t>
 
       <t>
