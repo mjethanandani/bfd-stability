@@ -198,10 +198,13 @@
 	a packet loss.
       </t>
 
-      <t>This proposal enables BFD implementations to generate diagnostic
-      information on the health of each BFD session that could be used to
-      preempt a failure on a datapath that BFD was monitoring by allowing time
-      for a corrective action to be taken.</t>
+      <t>
+	This proposal enables BFD implementations to generate
+	diagnostic information on the health of each BFD session that
+	could be used to preempt probability of a failure on a
+	datapath that BFD was monitoring by allowing time for a
+	corrective action to be taken.
+      </t>
 
       <t>
 	In a faulty datapath scenario, an operator can use BFD health
@@ -235,11 +238,11 @@
     <section anchor="null-auth-type" title="NULL Auth Type">
       <t>
 	The NULL Authentication Type, defined in this document, can be
-	used to provide a meticulously increasing sequence number for
-	stability measurement.  It provides none of the protections
-	desired for authentication and is used only to provide BFD
-	stability services to BFD sessions that otherwise have no
-	authentication in use.</t>
+	used to provide a meticulously increasing sequence number
+	<xref target="RFC5880">BFD</xref> for stability measurement.
+	It provides none of the protections desired for authentication
+	and is used only to provide BFD stability services to BFD
+	sessions that otherwise have no authentication in use.</t>
 
       <t>If the Authentication Present (A) bit is set in the header
       as defined in <xref target="RFC5880" section="4">BFD</xref>,
@@ -261,24 +264,33 @@
       </t>
 
       <t>
-	Auth Type: The Authentication Type, which in this case is TBD
-	(NULL, to be assigned by IANA, with a suggested value of 6).
+	Auth Type (8 bits): The Authentication Type, which in this
+	case is TBD (NULL, to be assigned by IANA, with a suggested
+	value of 6).
       </t>
 
-      <t>Auth Len: The length of the NULL Auth Type, in bytes; i.e., 8 bytes</t>
+      <t>
+	Auth Len (8 bits): The length of the NULL Auth Type, in bytes;
+	i.e., 8 bytes
+      </t>
 
       <t>
-	Auth Key ID: The authentication key ID in use for this
+	Auth Key ID (8 bits): The authentication key ID in use for this
 	packet. MUST be set to zero and ignored on receipt.
       </t>
 
-      <t>Reserved: This byte MUST be set to zero on transmit and ignored on
-      receipt.</t>
+      <t>
+	Reserved (8 bits): This byte MUST be set to zero on transmit
+	and ignored on receipt.
+      </t>
 
-      <t>Sequence Number: The sequence number for this packet.  This value is
-      incremented for each successive packet transmitted for a session.
-      Implementations will use sequence numbers (bfd.XmitAuthSeq) as defined in
-      <xref target="RFC5880">BFD</xref>.</t>
+      <t>
+	Sequence Number (32 bits): The sequence number for this
+	packet.  This value is incremented for each successive packet
+	transmitted for a session.  Implementations will use sequence
+	numbers (bfd.XmitAuthSeq) as defined in <xref
+	target="RFC5880">BFD</xref>.
+      </t>
 
       <t>
 	If bfd.AuthSeqKnown is 1, and the received Sequence Number
@@ -335,15 +347,16 @@
       <section title="Loss Measurement">
         <t>
 	  Loss measurement counts the number of BFD control packets
-	  missed at the receiver during any Detection Time period. The
-	  loss is detected by comparing the Sequence Number field in
-	  successive BFD control packets. The Sequence Number in each
-	  successive control packet generated on a BFD session by the
-	  transmitter is incremented by one. This loss count can then
-	  be exposed using the YANG module defined in the subsequent
-	  section. See discussion on <xref
-	  target="out-of-order-packets">Out of Order Packets</xref>
-	  later in the document.
+	  missed at the receiver during any Detection Time <xref
+	  target="RFC5880" section="6.8.4"
+	  sectionFormat="comma">BFD</xref> period. The loss is detected
+	  by comparing the Sequence Number field in successive BFD
+	  control packets. The Sequence Number in each successive
+	  control packet generated on a BFD session by the transmitter
+	  is incremented by one. This loss count can then be exposed
+	  using the YANG module defined in the subsequent section. See
+	  discussion on <xref target="out-of-order-packets">Out of
+	  Order Packets</xref> later in the document.
 	</t>
 
         <t>
