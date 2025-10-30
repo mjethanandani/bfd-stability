@@ -315,21 +315,32 @@
     </section>
 
     <section title="Theory of Operation">
-      <t>
-	This mechanism allows operators to measure the loss of BFD
-	control packets.
-      </t>
+      <t>This mechanism allows operators to measure the loss of BFD control
+      packets.  A BFD authentication type carrying a meticulously increasing
+      sequence number is required to support this loss measurement.
+      Authentication types that provide for meticulously increasing sequence
+      numbers include:</t>
+
+      <ul>
+	<li>
+	  Meticulously Keyed MD5 and SHA1, defined in 
+	  <xref target="RFC5880"/>.
+	</li>
+	<li>
+	  Meticulously Keyed ISAAC, defined in
+	  <xref target="I-D.ietf-bfd-secure-sequence-numbers"/>.
+	</li>
+	<li>
+	  The NULL authentication mechanism, which does not provide for
+	  authentication but carries a meticulously increasing sequence number,
+	  defined in this document.
+	</li>
+      </ul>
 
       <t>
-	When using MD5 or SHA authentication, BFD MUST use an
-	authentication type (bfd.AuthType) that is of type Meticulous
-	Keyed MD5 Authentication, Meticulous Keyed SHA1 as defined in
-	<xref target="RFC5880">BFD</xref> or other authentication
-	types that provide for meticulously increasing sequence
-	numbers can also be used.  This includes the NULL
-	authentication mechanism defined in this document or <xref
-	target="I-D.ietf-bfd-secure-sequence-numbers">Meticulous Keyed
-	ISAAC for BFD Authentication</xref>.
+	Other authentication types that provide for meticulously increasing
+	sequence numbers appropriate for this mechanism may be defined in future
+	specifications.
       </t>
 
       <section title="Loss Measurement">
