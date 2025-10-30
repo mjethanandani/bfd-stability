@@ -198,8 +198,7 @@
 	a packet loss.
       </t>
 
-      <t>
-	This proposal enables BFD implementations to generate
+      <t>This proposal enables BFD implementations to generate
 	diagnostic information on the health of each BFD session that
 	could be used to preempt probability of a failure on a
 	datapath that BFD was monitoring by allowing time for a
@@ -263,29 +262,24 @@
       where:
       </t>
 
-      <t>
-	Auth Type (8 bits): The Authentication Type, which in this
+      <t>Auth Type (8 bits): The Authentication Type, which in this
 	case is TBD (NULL, to be assigned by IANA, with a suggested
 	value of 6).
       </t>
 
-      <t>
-	Auth Len (8 bits): The length of the NULL Auth Type, in bytes;
+      <t>Auth Len (8 bits): The length of the NULL Auth Type, in bytes;
 	i.e., 8 bytes
       </t>
 
-      <t>
-	Auth Key ID (8 bits): The authentication key ID in use for this
+      <t>Auth Key ID (8 bits): The authentication key ID in use for this
 	packet. MUST be set to zero and MUST be ignored on receipt.
       </t>
 
-      <t>
-	Reserved (8 bits): This byte MUST be set to zero on transmit
+      <t>Reserved (8 bits): This byte MUST be set to zero on transmit
 	and MUST be ignored on receipt.
       </t>
 
-      <t>
-	Sequence Number (32 bits): The sequence number for this
+      <t>Sequence Number (32 bits): The sequence number for this
 	packet.  This value is incremented for each successive packet
 	transmitted for a session.  Implementations will use sequence
 	numbers (bfd.XmitAuthSeq) as defined in <xref
